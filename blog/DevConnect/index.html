@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DevConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../index.css"></head>
+  <body>
+    <div id="loading">
+      <div id="spinner"></div>
+    </div>
+    <a href="/" class="go_back"><i class="fas fa-arrow-left"></i></a>
+    <div id="background_overlay"></div>
+    <div id="background" style="background: url(visualize.gif) center;"></div>
+    <table id="profile_blog">
+      <tbody>
+        <tr>
+          <td style="width:8vw;"><div id="profile_img_blog"></div></td>
+          <td style="width:52vw;">
+            <div id="username_blog"></div>
+          </td>
+          <td style="width:20vw;"><div><a href="https://github.com/yohannes15/DeveloperMatchMaker" target="_blank"><button id="buttonz">Github</button></a></div></td>
+          <td style="width:30vw;"><div><a href="http://devconnect.pythonanywhere.com/login" target="_blank"><button id="buttonz">Go to Live Project</button></a></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="blog-display">
+      <h1 style="text-align: center;"id="blog_title">DevConnect</h1>
+      <h2 style="color:tan" id="blog_sub_title">email: test@testemail.com <br> Password: 199797 <br></h2><h2 style="color:tan"id="blog_sub_title">Use log in info above to log in and check out the live application.</h2></h2><h2 id="blog_sub_title">Dev-Connect is a developer matchmaking application for student developers at SJU. Student developers register with their details and their qualities and interests and after they have registered, they have a view of all aspiring developers at SJU. Users can look at each others skill sets and private message each other in order to collab... </h2>
+      <div id="blog"><p id="para_0_original"></p><p>Are you a student at SJU? Do you have a great idea for a project or a product and require help?</p>
+
+<p></p><p>Or are you trying to grow your skills through project collaboration? SJU Dev Connect is the best place for developers to find each other.</p><p></p><img src="img_0.png" alt="blog image 0" id="img_0_original"><p id="para_1_original"></p><p>Dev-Connect is a matchmaking application for student developers at SJU. Student developers register with their details and their qualities and interests, such as favorite programming language, current field of interest, database skill and more.</p><p></p><img src="img_1.png" alt="blog image 1" id="img_1_original"><p id="para_3_original"></p><p>After they have registered, they have a view of all aspiring developers at SJU.
+
+Developers/Users can:
+
+<ul>
+  <li>View other developers profile to see if they are fit for eachother, or have the qualities they are looking for!</li>
+  <li>Private Message other developers for questions, collaboration in projects, and in general, just to communicate with each other.</li>
+  <li>Edit their profile and account any time.</li>
+</ul>
+</p>
+
+
+<p></p><img src="img_2.png" alt="blog image 2" id="img_2_original"><p id="para_4_original"></p><p>Dev-Connect was created to encourage entrepreneurship and development of programming skills through real word projects built with other students that have similar or varied skills at St John's University.The number of computer science students at SJU isn't that high compared to other majors. This project had the sole goal of connecting developers together at a campus with not many developers.</p>
+
+<p>At the launch of this application/project, I had 12 people sign up after I presented it to my software engineering class.. It couldn't grow after that for a variety of reasons (no specific domain; it was hosted on pythonanywhere, lacked quality in the user interface. I am primarily a backend web developer. plus other failures)</p>
+
+<p>This project was developed using <b>Python, Flask, SQLite and JS.</b></p><p></p></div>
+    </div>
+
+    <script type="text/javascript">
+      setTimeout(function() {
+        document.getElementById("loading").classList.add("animated");
+        document.getElementById("loading").classList.add("fadeOut");
+        setTimeout(function() {
+          document.getElementById("loading").classList.remove("animated");
+          document.getElementById("loading").classList.remove("fadeOut");
+          document.getElementById("loading").style.display = "none";
+        }, 800);
+      }, 1500);
+      $.getJSON("../../config.json", function(user) {
+        var icon = document.createElement("link");
+        icon.setAttribute("rel", "icon");
+        icon.setAttribute("href", user[0].userimg);
+        icon.setAttribute("type", "image/png");
+        document.getElementsByTagName("head")[0].appendChild(icon);
+        document.getElementById(
+          "profile_img_blog"
+        ).style.background = `url('${user[0].userimg}') center center`;
+        document.getElementById(
+          "username_blog"
+        ).innerHTML = `<span style="display:${
+          user[0].name == null || !user[0].name ? "none" : "block"
+        };">${user[0].name}</span>@${user[0].username}<b id="blog_time"></b>`;
+
+        if ((user[0].theme = "dark.css")) {
+          document.querySelector("#background_overlay").style.background =
+            "linear-gradient(0deg, rgba(10, 10, 10, 1), rgba(10, 10, 10, 0.1))";
+        } else {
+          document.querySelector("#background_overlay").style.background =
+            "linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1))";
+        }
+      });
+    </script>
+  
+
+</body></html>

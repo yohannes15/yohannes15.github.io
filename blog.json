@@ -1,0 +1,18 @@
+[
+ {
+  "url_title": "AddisMap",
+  "title": "AddisMap",
+  "sub_title": "A shortest path finder application that uses OpenStreetMap node geodata to find the shortest path between start and destination points on a real world map using a variety of path finding algorithms.\r\n\r\nPlus a neaty visualizer for each algorithm. Built using Python web framework Django and Javascript.",
+  "top_image": "top_image.gif",
+  "visible": true
+ },
+
+ {
+    "url_title": "DevConnect",
+    "title": "DevConnect",
+    "sub_title": "Dev-Connect is a developer matchmaking application for student developers at SJU. Student developers register with their details and their qualities and interests and after they have registered, they have a view of all aspiring developers at SJU. Users can look at each others skill sets and private message each other in order to collab...",
+    "top_image": "visualize.gif",
+    "visible": true
+   }
+
+]
