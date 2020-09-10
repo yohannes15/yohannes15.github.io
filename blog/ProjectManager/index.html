@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project Manager / Issue Tracker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../index.css"></head>
+<body>
+  <div id="loading">
+    <div id="spinner"></div>
+  </div>
+  <a href="/" class="go_back"><i class="fas fa-arrow-left"></i></a>
+  <div id="background_overlay"></div>
+  <div id="background" style="background: url(dashboard.png) center;"></div>
+  <table id="profile_blog">
+    <tbody>
+      <tr>
+        <td style="width:8vw;"><div id="profile_img_blog"></div></td>
+        <td style="width:52vw;">
+          <div id="username_blog"></div>
+        </td>
+        <td style="width:20vw;"><div><a href="https://github.com/yohannes15/ProjectIssuesManager" target="_blank"><button id="buttonz">Github</button></a></div></td>
+        <td style="width:30vw;"><div><a href="https://issue-tracker-project-289115.uc.r.appspot.com/" target="_blank"><button id="buttonz">Go to Live Project</button></a></div></td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="blog-display">
+    <h1 style="text-align: center;"id="blog_title">Project Manager / Issue Tracker</h1>
+    <h2 style="color:tan" id="blog_sub_title"> <br></h2><h2 style="color:tan"id="blog_sub_title"></h2></h2><h2 id="blog_sub_title">Project Manager - Issue Manager is An application for managing issues, bugs and roles for projects. Built using ASP.NET Core 3.1 MVC and PostgreSQL. </h2>
+    <div id="blog">
+
+<p>There are three different roles and responsibilites that a signed up user potentially can have:
+  <ul>
+    <li ><p>Admin - Can see a list of all users, change user claims for all projects, create new projects, assign users to all projects, delete and manage details of projects and issues.</p>
+    </li>
+    <li ><p>Project Manager - Can see a list of all users, change user claims for one project, create new project, assign users to created projects and issues and bugs, delete and manage details of specific projects only.</p>
+    </li>
+    <li><p>Developer - can see list of issues and bugs assigned to developer, can see projects it is part of (without the ability to change details), create a new issue/delete its own issue. Doesn't have the ability to manage and change any issues except his/her own.</p>
+    </li>
+    </ul>
+
+  </p><p></p><img src="projects.png" alt="blog image 0" id="img_0_original"><p id="para_1_original"></p><p>Identity-Based Authentication and Policy-Based Claims Authorization to manage responsibilities.
+</p>
+
+<h3>PostgreSQL</h3>
+
+<p>The data for the ASPNETUSERS, Identities and Claims are stored in PostgreSQL using GCP Google Cloud SQL instance. The other tables are Project, Issue, ProjectIssues, IssueHistory, ProjectHistory, Screenshots.
+</p>
+
+<h3>Firebase Cloud Storage</h3>
+
+<p>Screenshots are stored using Google Firebase Cloud Storage. Create an account and store your credentials inside appsettings.json (Email, Password, Bucket and APIKEY).
+</p>
+
+<h3>Deployment</h3>
+
+<p>You can easily deploy using Google Cloud Platform using Google App Engine (Flex). <a style="color: beige"href="https://cloud.google.com/appengine/docs/flexible/dotnet/application-security">To protect anti-forgery and data protection</a> use the following: 
+  <li style="margin-bottom: 5px">Google.Cloud.AspNetCore.DataProtection.Kms;
+  </li>
+  <li style="margin-bottom: 5px">Google.Cloud.AspNetCore.DataProtection.Storage;
+  </li>
+</p>
+
+<p></p><img src="login.png" alt="blog image 2" id="img_2_original"><p id="para_4_original"></p>
+
+<p></p><img src="projects.png" alt="blog image 2" id="img_2_original"><p id="para_4_original"></p>
+
+<p></p><img src="issue.png" alt="blog image 3" id="img_2_original">
+
+<p></p><img src="manage.png" alt="blog image 3" id="img_2_original">
+
+<p></p></div>
+  </div>
+
+  <script type="text/javascript">
+    setTimeout(function() {
+      document.getElementById("loading").classList.add("animated");
+      document.getElementById("loading").classList.add("fadeOut");
+      setTimeout(function() {
+        document.getElementById("loading").classList.remove("animated");
+        document.getElementById("loading").classList.remove("fadeOut");
+        document.getElementById("loading").style.display = "none";
+      }, 800);
+    }, 1500);
+    $.getJSON("../../config.json", function(user) {
+      var icon = document.createElement("link");
+      icon.setAttribute("rel", "icon");
+      icon.setAttribute("href", user[0].userimg);
+      icon.setAttribute("type", "image/png");
+      document.getElementsByTagName("head")[0].appendChild(icon);
+      document.getElementById(
+        "profile_img_blog"
+      ).style.background = `url('${user[0].userimg}') center center`;
+      document.getElementById(
+        "username_blog"
+      ).innerHTML = `<span style="display:${
+        user[0].name == null || !user[0].name ? "none" : "block"
+      };">${user[0].name}</span>@${user[0].username}<b id="blog_time"></b>`;
+
+      if ((user[0].theme = "dark.css")) {
+        document.querySelector("#background_overlay").style.background =
+          "linear-gradient(0deg, rgba(10, 10, 10, 1), rgba(10, 10, 10, 0.1))";
+      } else {
+        document.querySelector("#background_overlay").style.background =
+          "linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.1))";
+      }
+    });
+  </script>
+
+
+</body></html>
