@@ -19,14 +19,6 @@
    "sub_title": "Dev-Connect is a developer matchmaking application for student developers at SJU. Student developers register with their details and their qualities and interests and after they have registered, they have a view of all aspiring developers at SJU. Users can look at each others skill sets and private message each other in order to collab...",
    "top_image": "visualize.gif",
    "visible": true
-},
- 
-{
-   "url_title": "ProjectManager",
-   "title": "Project-Manager/Issues-Tracker",
-   "sub_title": "Project Manager/Issues Tracker is a ASP.NET Core MVC application for managing issues, bugs and roles for projects. Three different roles and responsibilites that a signed up user potentially can have (Administrator, Project Manager and Developer). Built using .NET Core MVC and PostgreSQL",
-   "top_image": "dashboard.png",
-   "visible": true
-  }
+}
 ]
 

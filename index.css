@@ -390,7 +390,7 @@ body {
 
 #blogs section {
   width: 100%;
-  display: block;
+  display: inline-block;
   border-radius: 5px;
   color: var(--text-color);
   border: 1px solid rgb(0, 0, 0, 0.04);
@@ -584,6 +584,7 @@ body {
 }
 
 #blog_section section {
+  margin-bottom: 45px;
   background: rgb(20, 20, 20);
 }
 
