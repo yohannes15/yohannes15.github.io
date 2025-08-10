@@ -67,7 +67,7 @@ body {
 #display {
   width: 64vw;
   padding: 4vh 3vw;
-  height: 92vh;
+  height: auto;
   display: inline-block;
   padding-left: 33vw;
 }
@@ -184,16 +184,23 @@ body {
 
 #header {
   width: 63vw;
-  text-align: right;
-  padding: 3vh 0px;
-  position: absolute;
+  text-align: left;
+  padding: 1.2vh 0 1.8vh 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  z-index: 100;
 }
 
 #header a {
   color: var(--text-color);
   text-decoration: none;
-  margin-left: 4vw;
+  margin-left: 2vw;
   font-weight: bold;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 #footer_blog {
@@ -236,7 +243,6 @@ body {
 
 #profile div {
   font-weight: bold;
-  margin: 1.5vh 0px;
 }
 
 #username {
@@ -249,7 +255,7 @@ body {
 }
 
 #userbio {
-  font-size: 26px;
+  font-size: 20px;
   font-family: "Questrial", sans-serif;
   width: 100%;
 }
@@ -357,7 +363,6 @@ body {
 .socials {
   color: #fff;
   text-decoration: none;
-  margin: 3vh 0px !important;
 }
 
 .socials span {
@@ -376,7 +381,15 @@ body {
 }
 
 #blogs {
-  columns: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+#blogs a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 #blog_title {
@@ -478,8 +491,53 @@ body {
   }
 
   #blogs {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
+
+/* Resume sections */
+#experience, #oss, #skills, #education {
+  margin: 6vh 0;
+}
+
+.resume-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.resume-card {
+  padding: 2.5vh 5%;
+  border-radius: 5px;
+  color: var(--text-color);
+  border: 1px solid rgb(0, 0, 0, 0.08);
+  background: rgb(20, 20, 20);
+}
+
+.resume-card ul {
+  margin: 1em 0 0 1.2em;
+}
+
+.resume-card li {
+  margin: 6px 0;
+}
+
+.resume-meta {
+  color: var(--blog-gray-color);
+  font-size: 14px;
+  margin-top: -4px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 24px;
+}
+
+@media (max-width: 800px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
   #blogs section {
     width: 98%;

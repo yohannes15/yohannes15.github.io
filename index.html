@@ -16,115 +16,135 @@
     </div>
     <div id="profile">
       <div id="profile_img" style="background: url(https://avatars3.githubusercontent.com/u/48221308?v=4) center;"></div>
-      <div id="username"><span style="display:block;">Yohannes Berhane</span><a href="https://github.com/yohannes15">@yohannes15</a></div>
-      <div id="userbio" style="display: block;">Hey!! I am Yohannes, a software engineer in Queens, NY who enjoys full stack web development with ASP.NET Core or Django with React. </div>
+      <div id="username">
+        <span style="display:block;">Yohannes Berhane</span>
+      </div>
+      <div class="socials">
+        <span style="display:block !important;">LinkedIn:
+          <a href="https://www.linkedin.com/in/yohannes15/" class="socials" target="_blank"><i class="fab fa-linkedin-in"></i></a></span>
+        <span style="display:block !important;">GitHub:
+          <a href="https://www.github.com/yohannes15/" class="socials" target="_blank"><i class="fab fa-github"></i></a></span>
+      </div>
+      <div id="userbio" style="display: block;">
+        <ul>
+          <li>Accomplished Backend Software Engineer with 5+ years' experience.</li>
+          <li>Strong in Python (Django / Flask / FastAPI), JavaScript and Tailwind CSS.</li>
+          <li>Specializes in scalable backend systems and comfortable across the stack with React/HTMX/Alpine.js/Tailwind CSS.</li>
+          <li>Comfortable with C# and .NET Core.</li>
+          <li>Learning Golang currently.</li>
+          <li>Passionate about impactful products, teamwork, and continuous learning.</li>
+        </ul>
+      </div>
       <div id="about">
-                <span style="display:none;"><i class="fas fa-users"></i> &nbsp; null</span>
-                <span style="display:none;"><i class="fas fa-envelope"></i> &nbsp; null</span>
-                <span style="display:block;"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; New York</span>
-                <span style="display:none;"><i class="fas fa-user-tie"></i> &nbsp;&nbsp; Available for hire</span>
-                <div class="socials">
-                <span style="display:none !important;"><a href="https://www.twitter.com/undefined" target="_blank" class="socials"><i class="fab fa-twitter"></i></a></span>
-                <span style="display:none !important;"><a href="https://www.dribbble.com/undefined" target="_blank" class="socials"><i class="fab fa-dribbble"></i></a></span>
-                <span style="display:none !important;"><a href="https://www.linkedin.com/in/undefined/" target="_blank" class="socials"><i class="fab fa-linkedin-in"></i></a></span>
-                <span style="display:none !important;"><a href="https://www.medium.com/@undefined/" target="_blank" class="socials"><i class="fab fa-medium-m"></i></a></span>
-                </div>
-                </div>
+        <span style="display:block;"><i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp; Queens, NY</span>
+        <span style="display:block;"><i class="fas fa-user-tie"></i> &nbsp;&nbsp; Available for hire</span>
+      </div>
     </div>
     <div id="display">
+      <div id="header">
+        <a href="#experience">Experience</a>
+        <a href="#oss">Open Source Contributions</a>
+        <a href="#skills">Technical Skills</a>
+        <a href="#blog_section">Personal Projects</a>
+        <a href="#education">Education</a>
+      </div>
+      <div id="experience">
+        <h1 style="text-align: center;">Experience</h1>
+        <div class="resume-cards">
+          <section class="resume-card">
+            <div class="section_title">Senior Software Engineer — OptiFunder</div>
+            <div class="resume-meta">Sep 2021 – Present • Remote, NY</div>
+            <ul>
+              <li>Led development of scalable Django and Flask apps deployed on Google Compute Engine and Cloud Run. 
+                <ul>
+                  <li>Backend: Django, Flask, FastAPI, PostgreSQL, MySQL, Redis, DynamoDB.</li>
+                  <li>Frontend: HTMX, React, Alpine.js, Tailwind CSS.</li>
+                  <li>Database: PostgreSQL (Google Cloud SQL) and Redis.</li>
+                  <li>Google Cloud: Cloud Run, Cloud Functions, Cloud Tasks, Cloud Storage ...</li>
+                </ul>
+              </li>
+              <li>Built and maintained RESTful APIs with Django REST Framework and FastAPI for our optifunder APIs</li>
+              <li>Implemented distributed background processing with Google Cloud Tasks and Cloud Jobs to improve performance.</li>
+              <li>Established robust testing with Pytest, improving reliability and reducing production issues.</li>
+              <li>Contributed to system design/architecture and mentored a 3–5 developer team.</li>
+              <li>Optimized legacy schemas and queries, improving performance by 200%+.</li>
+            </ul>
+          </section>
+
+          <section class="resume-card">
+            <div class="section_title">Software Engineer — Trimble Maps</div>
+            <div class="resume-meta">Oct 2020 – Oct 2021 • Princeton, NJ</div>
+            <ul>
+              <li>Developed backend services with .NET Core, containerized with Docker, and deployed on AWS.</li>
+              <li>Automated CI/CD with Jenkins, Python, and Chef; reduced deployment times by 15%.</li>
+              <li>Modernized REST and SOAP services via ASP.NET Web APIs with blue‑green deployments.</li>
+              <li>Authored unit tests with NUnit/XUnit achieving ~85% coverage.</li>
+              <li>Improved SQL Server performance and transaction throughput, reducing query times by 30%.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <div id="oss">
+        <h1 style="text-align: center;">Open Source Contributions</h1>
+        <div class="resume-cards">
+          <section class="resume-card">
+            <div class="section_title">Django‑Storages — Signed URLs via IAM API <span hre> PR: #1427</span></div>
+            <div class="resume-meta"><a href="" target="_blank">PR #1427</a></div>
+            <ul>
+              <li>Developed feature to enable Google Cloud Compute services to generate signed URLs via IAM API.</li>
+              <li>Collaborated with maintainers to ensure secure and seamless integration of the feature, benefiting the community by
+                enhancing cloud storage capabilities.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <div id="skills">
+        <h1 style="text-align: center;">Technical Skills</h1>
+        <div class="resume-cards">
+          <section class="resume-card">
+            <div class="skills-grid">
+              <div>
+                <div class="section_title">Languages</div>
+                <p>Python, C#, JavaScript</p>
+              </div>
+              <div>
+                <div class="section_title">Frameworks</div>
+                <p>Django, Flask, FastAPI, ASP.NET Core, React, Celery, Pytest</p>
+              </div>
+              <div>
+                <div class="section_title">Databases</div>
+                <p>PostgreSQL, MySQL, SQL Server, Redis, DynamoDB</p>
+              </div>
+              <div>
+                <div class="section_title">Cloud & DevOps</div>
+                <p>AWS, GCP, Cloud Run, Docker, Dev Containers, Terraform, Jenkins, Git</p>
+              </div>
+              <div>
+                <div class="section_title">Strengths</div>
+                <p>System Design, Data Modeling, File Processing, Async & Parallel Processing</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
       <div id="blog_section">
-        <h1 style="text-align: center;">Favorite Projects</h1>
+        <h1 style="text-align: center;">Personal Projects</h1>
         <div id="blogs">
         </div>
         
       </div>
-      <div id="work">
-        <h1 style="text-align: center;">All Projects</h1>
-        <div class="projects" id="work_section">
-                    <a href="https://github.com/yohannes15/ProjectIssuesManager" target="_blank">
-                      <section>
-                          <div class="section_title">Project/Issues Manager</div>
-                          <div class="about_section">
-                          <span style="display:block;">An application for managing issues, bugs and roles for projects. Built using ASP.NET Core 3.1 MVC and PostgreSQL. Three different roles and responsibilites that a signed up user potentially can have.(Admin, Developer and Project Manager) managed by Identity-Based Authentication and Policy-Based Claims Authorization.
 
-                          </span>
-                          </div>
-                          <div class="bottom_section">
-                              <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; C#</span>
-                              <span><i class="fas fa-star"></i>&nbsp; 1</span>
-                              <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                          </div>
-                      </section>
-                      </a>
-                        <a href="https://github.com/yohannes15/AddisMap" target="_blank">
-                        <section>
-                            <div class="section_title">AddisMap</div>
-                            <div class="about_section">
-                            <span style="display:block;">A Django App that finds the path between two points (selected by the user) on a real world map, using different path finding algorithms (Dijkstra, A-Star, BFS, Greedy-First...) On top of that, the app creates a visualizer for each algorithm to get a better grasp of how the algorithm finds the shortest path. A comparison to the shortest path found by Google Maps is also generated to judge the accuracy of the shortest path found by this app.</span>
-                            </div>
-                            <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; Python</span>
-                                <span><i class="fas fa-star"></i>&nbsp; 1</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                            </div>
-                        </section>
-                        </a>
-                        <a href="https://github.com/yohannes15/DeveloperMatchMaker" target="_blank">
-                        <section>
-                            <div class="section_title">DeveloperMatchMaker</div>
-                            <div class="about_section">
-                            <span style="display:block;">Dev-Connect is a developer matchmaking application for student developers at SJU. Student developers register with their details and their qualities and interests and after they have registered, they have a view of all aspiring developers at SJU. Users can look at each others skill sets and private message each other in order to collab or just to know each other. Dev Connect was created to promote entrepreneurship and project collaboration at SJU.</span>
-                            </div>
-                            <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; Python</span>
-                                <span><i class="fas fa-star"></i>&nbsp; 0</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                            </div>
-                        </section>
-                        </a>
-                        <a href="https://github.com/yohannes15/PatientDoctor" target="_blank">
-                        <section>
-                            <div class="section_title">PatientDoctor</div>
-                            <div class="about_section">
-                            <span style="display:block;">A Doctor-Patient system built on primarily on Python, Flask and HTML. This application has a user authentication system as well as an implementation of a database for storing Doctors and Patients and their relationship with each other. The design and HTML part of the system isn't complete but the functional aspect is.</span>
-                            </div>
-                            <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; Python</span>
-                                <span><i class="fas fa-star"></i>&nbsp; 2</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                            </div>
-                        </section>
-                        </a>
-                        <a href="https://github.com/yohannes15/TicTacToe" target="_blank" >
-                        <section>
-                            <div class="section_title">TicTacToe</div>
-                            <div class="about_section">
-                            <span style="display:block;">An implementation of the famous game, TicTacToe, in android studio. You can play against another player on the same device or play against the computer. </span>
-                            </div>
-                            <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; Java</span>
-                                <span><i class="fas fa-star"></i>&nbsp; 1</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                            </div>
-                        </section>
-                        </a>
-                        <a href="https://github.com/yohannes15/WoodInstallers" target="_blank">
-                        <section>
-                            <div class="section_title">WoodInstallers</div>
-                            <div class="about_section">
-                            <span style="display:block;">A website built for American Wood Installers, a millwork company in Long Island. The website is built on HTML, CSS, Bootstrap and JavaScript.</span>
-                            </div>
-                            <div class="bottom_section">
-                                <span style="display:inline-block;"><i class="fas fa-code"></i>&nbsp; JavaScript</span>
-                                <span><i class="fas fa-star"></i>&nbsp; 0</span>
-                                <span><i class="fas fa-code-branch"></i>&nbsp; 0</span>
-                            </div>
-                        </section>
-                        </a></div>
-      </div>
-      <div id="forks" style="display:none;">
-        <h1>Forks.</h1>
-        <div class="projects" id="forks_section"></div>
+      <div id="education" style="padding-bottom: 5vh;">
+        <h1 style="text-align: center;">Education</h1>
+        <div class="resume-cards">
+          <section class="resume-card">
+            <div class="section_title">St. John’s University — B.S. Computer Science</div>
+            <div class="resume-meta">Queens, NY • Aug 2016 – May 2020</div>
+          </section>
+        </div>
       </div>
     </div>
     <script type="text/javascript">
@@ -140,8 +160,7 @@
       $.getJSON("blog.json", function(blog) {
         blog = blog || [];
         if (blog.length == 0) {
-          return (document.getElementById("blog_section").style.display =
-            "none");
+          return (document.getElementById("blog_section").style.display = "none");
         }
         for (var i = 0; i < blog.length; i++) {
           $("#blogs").append(`
