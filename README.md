@@ -4,8 +4,6 @@ Personal portfolio rebuilt with **[Astro](https://astro.build/)**.
 
 **Live**: [https://yohannes15.github.io/](https://yohannes15.github.io/)
 
-**Profile photo**: add a square-ish image at `public/images/profile.jpg` (or `.png`, `.jpeg`, `.webp`). The homepage picks the first matching file automatically; otherwise it falls back to your GitHub avatar.
-
 ## Local development
 
 Requirements: Node 20+ recommended (GitHub Actions uses Node 22).
