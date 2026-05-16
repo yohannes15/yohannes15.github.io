@@ -5,14 +5,18 @@ import { getPortfolioProjects } from '../../lib/github-projects';
 const allProjects = await getPortfolioProjects();
 
 const projects = allProjects.filter(p => 
-  p.tags.includes('Active') || p.tags.includes('Stale') || p.tags.includes('Demo')
+  p.tags.includes('Active') || 
+  p.tags.includes('Stale') || 
+  p.tags.includes('Demo') ||
+  p.tags.includes('Showcase')
 );
 
 const learning = allProjects.filter(p => 
   p.tags.includes('Learning') && 
   !p.tags.includes('Active') && 
   !p.tags.includes('Stale') &&
-  !p.tags.includes('Demo')
+  !p.tags.includes('Demo') &&
+  !p.tags.includes('Showcase')
 );
 ---
 

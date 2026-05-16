@@ -721,6 +721,12 @@ section.block:last-of-type {
   border-color: rgba(148, 163, 184, 0.3);
 }
 
+.tag-showcase {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
 .tag-language {
   background: rgba(139, 92, 246, 0.1);
   color: #8b5cf6;

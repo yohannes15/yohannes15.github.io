@@ -15,6 +15,7 @@ export const projectsConfig = {
     'demo': 'Demo',
     'tool': 'Tool',
     'archived': 'Archived',
+    'showcase': 'Showcase',
   } as const,
   
   // Map GitHub repo names to display titles (optional overrides)
