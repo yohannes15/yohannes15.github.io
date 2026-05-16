@@ -1,0 +1,21 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Yohannes Berhane', description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main id="main" class="page-wrap">
+    <slot />
+    <footer class="site-footer">
+      <span>© {new Date().getFullYear()} Yohannes Berhane</span>
+    </footer>
+  </main>
+</BaseLayout>

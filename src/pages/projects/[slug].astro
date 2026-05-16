@@ -1,0 +1,48 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('projects');
+  return entries.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+
+const { title, subtitle, github, demo, thumb } = project.data;
+const { Content } = await render(project);
+---
+
+<PageLayout title={title} description={subtitle}>
+  <nav class="muted-note" aria-label="Breadcrumb">
+    <a href="/projects/">← All projects</a>
+  </nav>
+  <article class="project-detail">
+    <header style="margin: 1.25rem 0 1rem">
+      <h1 style="font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.3rem); margin: 0 0 0.5rem">
+        {title}
+      </h1>
+      <p class="project-intro" style="margin: 0 0 1rem">{subtitle}</p>
+      <div class="contact-row">
+        <a class="pill-link" href={github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        {demo && (
+          <a class="pill-link pill-muted" href={demo} target="_blank" rel="noopener noreferrer">
+            Live demo
+          </a>
+        )}
+      </div>
+    </header>
+    <img class="project-hero-thumb" src={thumb} alt="" width="960" height="540" loading="eager" />
+    <div class="prose" style="margin-top: 1.35rem">
+      <Content />
+    </div>
+  </article>
+</PageLayout>

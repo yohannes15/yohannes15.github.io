@@ -1,0 +1,18 @@
+---
+import PageLayout from './PageLayout.astro';
+
+const props = Astro.props as {
+  title?: string;
+  description?: string;
+  frontmatter?: { title?: string; description?: string };
+};
+
+const title = props.title ?? props.frontmatter?.title ?? 'Page';
+const description = props.description ?? props.frontmatter?.description;
+---
+
+<PageLayout title={title} description={description}>
+  <article class="prose">
+    <slot />
+  </article>
+</PageLayout>

@@ -1,0 +1,256 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'AWS · ECS · RDS/Aurora', 'GCP · Cloud Run'];
+---
+
+<PageLayout
+  description="Backend engineer specializing in pragmatic Python delivery, deepening Scala/FP practice, with modern web and cloud footprints."
+>
+  <section class="hero" aria-labelledby="intro-heading">
+    <img
+      class="avatar"
+      src="https://avatars.githubusercontent.com/u/48221308?v=4"
+      width="112"
+      height="112"
+      alt="Portrait of Yohannes Berhane"
+      loading="eager"
+    />
+    <div class="lede">
+      <h1 id="intro-heading">Human-sized systems. Big-traffic backends.</h1>
+      <p class="lede-sub">
+        I’m Yohannes—an experienced backend engineer who ships pragmatic services in <strong>Python</strong> ecosystems while
+        building deeper modeling muscle in <strong>Scala</strong>
+        (<em>Cats</em>, effectful services, disciplined HTTP stacks). Comfortable across AWS/GCP, relational datastores, queues, Terraform, Docker, and pragmatic
+        product-facing UI seams (HTMX, React, Alpine, Tailwind) when velocity matters more than ceremony.
+      </p>
+      <div class="contact-row">
+        <a class="pill-link" href="mailto:y.berhane56@gmail.com"> Email </a>
+        <a class="pill-link pill-muted" href="https://www.linkedin.com/in/yohannes-berhane/" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+        <a class="pill-link pill-muted" href="https://github.com/yohannes15" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn-primary btn-primary-accent" href="/resume/">View résumé</a>
+      </div>
+      <ul class="tag-list" aria-label="Highlights">
+        {TECH_TAGS.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="exp-heading">
+    <div class="section-head">
+      <h2 id="exp-heading">Experience</h2>
+    </div>
+    <p class="muted-note">Roughly recruiter-shaped narrative; fuller bullets live on <a href="/resume/">Résumé</a>.</p>
+    <div class="card-stack">
+      <article class="job-card">
+        <div class="job-card-header">
+          <div>
+            <div class="job-title">Senior Software Engineer — Gen</div>
+            <div class="job-meta">Oct 2025 – May 2026 · Hybrid, New York, NY</div>
+          </div>
+        </div>
+        <ul>
+          <li>
+            Owned a large outsourced Django carve-in (~700k req/day posture) onto ECS/RDS+Aurora; Terraform IaC substituted for brittle click-ops rituals.
+          </li>
+          <li>
+            Shipped Scala services with Cats / Http4s while keeping pragmatic Django REST partner surfaces honest about throughput realities.
+          </li>
+          <li>
+            Data motion: Snowflake → S3 → Lambda → SQS paths moving multi-million-record refresh cycles through production guardrails.
+          </li>
+        </ul>
+      </article>
+
+      <article class="job-card">
+        <div class="job-card-header">
+          <div>
+            <div class="job-title">Senior Software Engineer — OptiFunder</div>
+            <div class="job-meta">
+              Sep 2021 – Oct 2025 · promoted May 2023 · Remote, NY · serving a wide slice of US independent mortgage LOS traffic
+            </div>
+          </div>
+        </div>
+        <ul>
+          <li>
+            Full-stack-but-backend-first building: Django/Flask guts with HTMX, Alpine, occasional React—and Tailwind to keep UX velocity aligned with infra work.
+          </li>
+          <li>
+            Stitched micro-ish boundaries around loan optimization flows; leaned on asyncio, threading, GCP Tasks/Jobs when cron-shaped thinking wasn’t honest.
+          </li>
+          <li>
+            DRF-heavy APIs engineered for uptime and evolution under real partner contracts—not “passes pydantic vibes only”.
+          </li>
+          <li>
+            Re-shaped gnarled relational schemas; worst queries stopped being punchlines (200%+ improvements on profiling-backed hotspots).
+          </li>
+          <li>
+            Led a small merry band (~3–5): reviews, design translation, escalation triage—with humor kept optional but encouraged.
+          </li>
+        </ul>
+      </article>
+
+      <article class="job-card">
+        <div class="job-card-header">
+          <div>
+            <div class="job-title">Software Engineer — Trimble Maps</div>
+            <div class="job-meta">Oct 2020 – Oct 2021 · Princeton, NJ · AWS / Docker / .NET Core</div>
+          </div>
+        </div>
+        <ul>
+          <li>Operational services for GIS-scale integrations; pragmatic .NET backends with infra that matched production reality.</li>
+          <li>CI/CD automation (Jenkins, Python, Chef) shaving deployment drag ~15%; blue/green service rollouts surviving traffic spikes.</li>
+          <li>SQL Server perf work—fewer sluggish transactions in mission-critical ingestion paths (~30% latency win on audited queries).</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="opensource-heading">
+    <div class="section-head">
+      <h2 id="opensource-heading">Open source footprint</h2>
+    </div>
+    <p class="muted-note oss-note">
+      Small but purposeful wins beat vanity commit counts—I prefer patches that unblock real infra teams quietly suffering.
+    </p>
+    <article class="job-card">
+      <div class="job-card-header">
+        <div>
+          <div class="job-title">Django-Storages · signed IAM-style URLs</div>
+          <div class="job-meta">
+            Pull request:&nbsp;<a href="https://github.com/jschneier/django-storages/pull/1427" target="_blank" rel="noopener noreferrer">
+              django-storages#1427
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <li>Added Google IAM API integration so signed URLs can flow through cloud-native IAM surfaces—useful beyond toy buckets.</li>
+        <li>Worked with upstream maintainers to keep foot-guns taped shut (security regressions ruin afternoon naps).</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="block" aria-labelledby="skills-heading">
+    <div class="section-head">
+      <h2 id="skills-heading">Technical toolbox</h2>
+    </div>
+    <div class="skills-panel">
+      <article class="skill-block">
+        <h3>Languages</h3>
+        <p>
+          Python (primary delivery lane) · Scala (Cats ecosystem) · JavaScript/C# selectively · pragmatic SQL whispering
+        </p>
+      </article>
+      <article class="skill-block">
+        <h3>Python ecosystem</h3>
+        <p>Django · Flask · FastAPI · Django REST Framework · Celery · Pytest</p>
+      </article>
+      <article class="skill-block">
+        <h3>Scala ecosystem</h3>
+        <p>Cats · Cats Effect · Http4s · functional modeling under services</p>
+      </article>
+      <article class="skill-block">
+        <h3>Frontend collisions</h3>
+        <p>React · HTMX · Alpine · Tailwind (when backends need humane surfaces)</p>
+      </article>
+      <article class="skill-block">
+        <h3>Cloud · infra · data</h3>
+        <p>AWS ECS/Lambda/RDS+Aurora style paths · GCP (Cloud Run, Tasks, IAM-shaped auth) · Terraform · Docker · GitHub Actions · Snowflake touchpoints where analytics cross streams</p>
+      </article>
+      <article class="skill-block">
+        <h3>Databases · caching</h3>
+        <p>PostgreSQL · MySQL · SQL Server · Redis · DynamoDB</p>
+      </article>
+      <article class="skill-block">
+        <h3>Strengths adjacent to keyboards</h3>
+        <p>System-ish design instincts · schema surgery · pragmatic async & batch patterns · mentorship without buzzword bingo decks</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="projects-heading">
+    <div class="section-head">
+      <h2 id="projects-heading">Older lab projects worth a skim</h2>
+      <a class="muted-note" href="/projects/"> Browse all » </a>
+    </div>
+    <p class="muted-note">
+      Student-era builds that still illustrate full-stack seriousness—routing, auth-ish boundaries, humane visuals over README fiction.
+    </p>
+    <div class="project-grid">
+      {
+        projects.map((p) => (
+          <article class="project-card">
+            <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
+              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
+            </a>
+            <div class="project-body">
+              <h3>
+                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+              </h3>
+              <p class="project-lede">{p.data.subtitle}</p>
+            </div>
+            <div class="project-actions">
+              <a class="pill-link pill-muted" href={`/projects/${p.slug}/`}>
+                Narrative blurbs
+              </a>
+              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+                Repo
+              </a>
+              {p.data.demo && (
+                <a class="pill-link" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+                  Demo
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="fun-heading">
+    <div class="section-head">
+      <h2 id="fun-heading">Beyond the README · personality leak</h2>
+    </div>
+    <ul class="fun-list">
+      <li>
+        <strong>Food & culture:</strong>{' '}I treat great meals like distributed tracing—observe every span (appetizers count as sibling spans too).
+      </li>
+      <li>
+        <strong>Chess-ish thinking:</strong>{' '}I play badly on purpose occasionally so coworkers feel better—then ruthlessly refactor their PRs lovingly.
+      </li>
+      <li>
+        <strong>Urban wanderings:</strong>{' '}Walking Queens with headphones is practically load testing pedestrian APIs.
+      </li>
+      <li>
+        <strong>Humor policy:</strong>{' '}Dry wit in standups beats verbose status theater; caveat: does not indemnify against espresso-fueled rants about broken migrations.
+      </li>
+      <li>
+        <strong>Functional programming:</strong>{' '}Cats make me grin because math-shaped programs age better—but I refuse to fetishize purity over shipping safely.
+      </li>
+      <li>
+        <strong>Reminder:</strong>{' '}This section is lovingly tongue-in-cheek—recruiters skim above; humans scroll here deliberately.
+      </li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="education-heading">
+    <div class="section-head">
+      <h2 id="education-heading">Education</h2>
+    </div>
+    <article class="job-card">
+      <div class="job-card-header">
+        <div>
+          <div class="job-title">St. John’s University · B.S., Computer Science</div>
+          <div class="job-meta">Queens, NY · Aug 2016 – May 2020</div>
+        </div>
+      </div>
+    </article>
+  </section>
+</PageLayout>
