@@ -1,16 +1,30 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import { enrichProjectsWithActivity } from '../lib/github';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const allProjects = await getCollection('projects');
+const enrichedProjects = await enrichProjectsWithActivity(allProjects);
+const sortedProjects = enrichedProjects.sort((a, b) => a.data.order - b.data.order);
 
-const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'AWS · ECS · RDS/Aurora', 'GCP · Cloud Run'];
+const projects = sortedProjects.filter(p => 
+  p.data.tags.includes('Active') || p.data.tags.includes('Stale') || p.data.tags.includes('Demo')
+);
+
+const learning = sortedProjects.filter(p => 
+  p.data.tags.includes('Learning') && 
+  !p.data.tags.includes('Active') && 
+  !p.data.tags.includes('Stale') &&
+  !p.data.tags.includes('Demo')
+);
+
+const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'Go', 'AWS · GCP'];
 
 const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
 ---
 
 <PageLayout
-  description="Backend engineer specializing in pragmatic Python delivery, deepening Scala/FP practice, with modern web and cloud footprints."
+  description="Backend engineer with 6+ years building scalable distributed systems in Python, Scala, and cloud infrastructure."
 >
   <section class="hero" aria-labelledby="intro-heading">
     <img
@@ -22,12 +36,11 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       loading="eager"
     />
     <div class="lede">
-      <h1 id="intro-heading">Human-sized systems. Big-traffic backends.</h1>
+      <h1 id="intro-heading">Backend Software Engineer</h1>
       <p class="lede-sub">
-        I’m Yohannes—an experienced backend engineer who ships pragmatic services in <strong>Python</strong> ecosystems while
-        building deeper modeling muscle in <strong>Scala</strong>
-        (<em>Cats</em>, effectful services, disciplined HTTP stacks). Comfortable across AWS/GCP, relational datastores, queues, Terraform, Docker, and pragmatic
-        product-facing UI seams (HTMX, React, Alpine, Tailwind) when velocity matters more than ceremony.
+        Backend engineer with 6+ years building scalable distributed systems. 
+        Expert in <strong>Python</strong> (Django, Flask, FastAPI) with growing proficiency in <strong>Scala</strong> (Cats, Cats Effect, Http4s) and <strong>Go</strong>. 
+        Led infrastructure migrations handling 700K+ requests per day and scaled systems serving 15%+ of US independent mortgage originations.
       </p>
       <div class="contact-row">
         <a class="pill-link" href="mailto:y.berhane56@gmail.com"> Email </a>
@@ -35,7 +48,7 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
           LinkedIn
         </a>
         <a class="pill-link pill-muted" href="https://github.com/yohannes15" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="btn-primary btn-primary-accent" href="/resume/">View résumé</a>
+        <a class="btn-primary" href="/resume/">View resume</a>
       </div>
       <ul class="tag-list" aria-label="Highlights">
         {TECH_TAGS.map((t) => <li>{t}</li>)}
@@ -47,24 +60,27 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     <div class="section-head">
       <h2 id="exp-heading">Experience</h2>
     </div>
-    <p class="muted-note">Roughly recruiter-shaped narrative; fuller bullets live on <a href="/resume/">Résumé</a>.</p>
     <div class="card-stack">
       <article class="job-card">
         <div class="job-card-header">
           <div>
             <div class="job-title">Senior Software Engineer — Gen</div>
-            <div class="job-meta">Oct 2025 – May 2026 · Hybrid, New York, NY</div>
+            <div class="job-meta">Oct 2025 – May 2026 · New York, NY (Hybrid)</div>
           </div>
         </div>
         <ul>
           <li>
-            Owned a large outsourced Django carve-in (~700k req/day posture) onto ECS/RDS+Aurora; Terraform IaC substituted for brittle click-ops rituals.
+            Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora. 
+            Implemented infrastructure as code with Terraform to eliminate manual overhead and improve reliability.
           </li>
           <li>
-            Shipped Scala services with Cats / Http4s while keeping pragmatic Django REST partner surfaces honest about throughput realities.
+            Developed internal rule-based decision engines using Scala, Cats, and Http4s. Managed partner integrations via a high-throughput Django REST platform.
           </li>
           <li>
-            Data motion: Snowflake → S3 → Lambda → SQS paths moving multi-million-record refresh cycles through production guardrails.
+            Designed a data pipeline (Snowflake → S3 → Lambda → SQS) to process over 5 million leads monthly for automated offer refreshes.
+          </li>
+          <li>
+            Supported a decisioning platform for credit card partners, enabling secure execution of partner-provided decision engines via containerized environments.
           </li>
         </ul>
       </article>
@@ -73,26 +89,29 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         <div class="job-card-header">
           <div>
             <div class="job-title">Senior Software Engineer — OptiFunder</div>
-            <div class="job-meta">
-              Sep 2021 – Oct 2025 · promoted May 2023 · Remote, NY · serving a wide slice of US independent mortgage LOS traffic
-            </div>
+            <div class="job-meta">Sep 2021 – Oct 2025 (Promoted May 2023) · Remote, NY</div>
           </div>
         </div>
         <ul>
           <li>
-            Full-stack-but-backend-first building: Django/Flask guts with HTMX, Alpine, occasional React—and Tailwind to keep UX velocity aligned with infra work.
+            Led design and development of high-performance Django and Flask applications serving over 15% of US independent mortgage originations. 
+            Utilized HTMX, Alpine.js, React, and Tailwind CSS for modern frontend experiences.
           </li>
           <li>
-            Stitched micro-ish boundaries around loan optimization flows; leaned on asyncio, threading, GCP Tasks/Jobs when cron-shaped thinking wasn’t honest.
+            Orchestrated migration to a microservices-based architecture for the loan optimization engine, leveraging asyncio, threading, 
+            and distributed tasks via Google Cloud Tasks and Jobs.
           </li>
           <li>
-            DRF-heavy APIs engineered for uptime and evolution under real partner contracts—not “passes pydantic vibes only”.
+            Engineered and maintained RESTful APIs using Django REST Framework, ensuring high availability and secure data processing.
           </li>
           <li>
-            Re-shaped gnarled relational schemas; worst queries stopped being punchlines (200%+ improvements on profiling-backed hotspots).
+            Redesigned and normalized legacy database schemas, resulting in a 200% improvement in query performance.
           </li>
           <li>
-            Led a small merry band (~3–5): reviews, design translation, escalation triage—with humor kept optional but encouraged.
+            Managed large-scale cloud deployments on GCP using Terraform while establishing comprehensive testing standards with Pytest.
+          </li>
+          <li>
+            Mentored a team of 3-5 developers, driving technical decisions, conducting code reviews, and steering the product roadmap.
           </li>
         </ul>
       </article>
@@ -101,13 +120,22 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         <div class="job-card-header">
           <div>
             <div class="job-title">Software Engineer — Trimble Maps</div>
-            <div class="job-meta">Oct 2020 – Oct 2021 · Princeton, NJ · AWS / Docker / .NET Core</div>
+            <div class="job-meta">Oct 2020 – Oct 2021 · Princeton, NJ</div>
           </div>
         </div>
         <ul>
-          <li>Operational services for GIS-scale integrations; pragmatic .NET backends with infra that matched production reality.</li>
-          <li>CI/CD automation (Jenkins, Python, Chef) shaving deployment drag ~15%; blue/green service rollouts surviving traffic spikes.</li>
-          <li>SQL Server perf work—fewer sluggish transactions in mission-critical ingestion paths (~30% latency win on audited queries).</li>
+          <li>
+            Developed backend services using .NET Core and deployed in Docker containers on AWS to support high-volume GPS mapping and logistics operations.
+          </li>
+          <li>
+            Automated CI/CD pipelines using Jenkins, Python, and Chef, reducing deployment times by 15%.
+          </li>
+          <li>
+            Modernized REST and SOAP services using ASP.NET Web APIs, ensuring high availability with blue-green deployment strategies.
+          </li>
+          <li>
+            Enhanced SQL Server database performance, reducing query response times by 30%.
+          </li>
         </ul>
       </article>
     </div>
@@ -115,75 +143,114 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
 
   <section class="block" aria-labelledby="opensource-heading">
     <div class="section-head">
-      <h2 id="opensource-heading">Open source footprint</h2>
+      <h2 id="opensource-heading">Open Source Contributions</h2>
     </div>
-    <p class="muted-note oss-note">
-      Small but purposeful wins beat vanity commit counts—I prefer patches that unblock real infra teams quietly suffering.
-    </p>
     <article class="job-card">
       <div class="job-card-header">
         <div>
-          <div class="job-title">Django-Storages · signed IAM-style URLs</div>
+          <div class="job-title">Django Storages</div>
           <div class="job-meta">
-            Pull request:&nbsp;<a href="https://github.com/jschneier/django-storages/pull/1427" target="_blank" rel="noopener noreferrer">
-              django-storages#1427
+            <a href="https://github.com/jschneier/django-storages/pull/1427" target="_blank" rel="noopener noreferrer">
+              Pull Request #1427
             </a>
           </div>
         </div>
       </div>
       <ul>
-        <li>Added Google IAM API integration so signed URLs can flow through cloud-native IAM surfaces—useful beyond toy buckets.</li>
-        <li>Worked with upstream maintainers to keep foot-guns taped shut (security regressions ruin afternoon naps).</li>
+        <li>
+          Developed feature for Google Cloud Compute services to generate signed URLs via IAM API.
+        </li>
+        <li>
+          Collaborated with maintainers to ensure secure integration that benefits the broader community.
+        </li>
       </ul>
     </article>
   </section>
 
   <section class="block" aria-labelledby="skills-heading">
     <div class="section-head">
-      <h2 id="skills-heading">Technical toolbox</h2>
+      <h2 id="skills-heading">Technical Skills</h2>
     </div>
-    <div class="skills-panel">
-      <article class="skill-block">
+    <div class="skills-grid">
+      <article class="skill-card">
+        <div class="skill-icon">💻</div>
         <h3>Languages</h3>
-        <p>
-          Python (primary delivery lane) · Scala (Cats ecosystem) · JavaScript/C# selectively · pragmatic SQL whispering
-        </p>
+        <div class="skill-tags">
+          <span class="skill-tag skill-tag-primary">Python</span>
+          <span class="skill-tag">Scala</span>
+          <span class="skill-tag">Go</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">SQL</span>
+        </div>
       </article>
-      <article class="skill-block">
-        <h3>Python ecosystem</h3>
-        <p>Django · Flask · FastAPI · Django REST Framework · Celery · Pytest</p>
+
+      <article class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h3>Python Stack</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">DRF</span>
+          <span class="skill-tag">Celery</span>
+          <span class="skill-tag">Pytest</span>
+        </div>
       </article>
-      <article class="skill-block">
-        <h3>Scala ecosystem</h3>
-        <p>Cats · Cats Effect · Http4s · functional modeling under services</p>
+
+      <article class="skill-card">
+        <div class="skill-icon">λ</div>
+        <h3>Scala & FP</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Cats</span>
+          <span class="skill-tag">Cats Effect</span>
+          <span class="skill-tag">Http4s</span>
+          <span class="skill-tag">FS2</span>
+        </div>
       </article>
-      <article class="skill-block">
-        <h3>Frontend collisions</h3>
-        <p>React · HTMX · Alpine · Tailwind (when backends need humane surfaces)</p>
+
+      <article class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud & Infra</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">GitHub Actions</span>
+        </div>
       </article>
-      <article class="skill-block">
-        <h3>Cloud · infra · data</h3>
-        <p>AWS ECS/Lambda/RDS+Aurora style paths · GCP (Cloud Run, Tasks, IAM-shaped auth) · Terraform · Docker · GitHub Actions · Snowflake touchpoints where analytics cross streams</p>
+
+      <article class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h3>Databases</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">DynamoDB</span>
+          <span class="skill-tag">Snowflake</span>
+        </div>
       </article>
-      <article class="skill-block">
-        <h3>Databases · caching</h3>
-        <p>PostgreSQL · MySQL · SQL Server · Redis · DynamoDB</p>
-      </article>
-      <article class="skill-block">
-        <h3>Strengths adjacent to keyboards</h3>
-        <p>System-ish design instincts · schema surgery · pragmatic async & batch patterns · mentorship without buzzword bingo decks</p>
+
+      <article class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <h3>Frontend</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">HTMX</span>
+          <span class="skill-tag">Alpine.js</span>
+          <span class="skill-tag">Tailwind</span>
+        </div>
       </article>
     </div>
   </section>
 
-  <section class="block" aria-labelledby="projects-heading">
+  <section class="block" aria-labelledby="projects-heading" style="margin-bottom: 3rem">
     <div class="section-head">
-      <h2 id="projects-heading">Older lab projects worth a skim</h2>
-      <a class="muted-note" href="/projects/"> Browse all » </a>
+      <h2 id="projects-heading">Projects</h2>
+      <a class="muted-note" href="/projects/"> View all » </a>
     </div>
-    <p class="muted-note">
-      Student-era builds that still illustrate full-stack seriousness—routing, auth-ish boundaries, humane visuals over README fiction.
-    </p>
     <div class="project-grid">
       {
         projects.map((p) => (
@@ -192,23 +259,33 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
               <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
             <div class="project-body">
+              {p.data.tags && p.data.tags.length > 0 && (
+                <div class="project-tags">
+                  {p.data.language && (
+                    <span class={`tag tag-language`}>{p.data.language}</span>
+                  )}
+                  {p.data.tags.map((tag) => (
+                    <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+                  ))}
+                </div>
+              )}
               <h3>
                 <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
               </h3>
               <p class="project-lede">{p.data.subtitle}</p>
             </div>
             <div class="project-actions">
-              <a class="pill-link pill-muted" href={`/projects/${p.slug}/`}>
-                Narrative blurbs
-              </a>
               <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
-                Repo
+                GitHub
               </a>
               {p.data.demo && (
-                <a class="pill-link" href={p.data.demo} target="_blank" rel="noopener noreferrer">
-                  Demo
+                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+                  Live Demo
                 </a>
               )}
+              <a class="pill-link pill-muted" href={`/projects/${p.slug}/`}>
+                Details
+              </a>
             </div>
           </article>
         ))
@@ -216,30 +293,51 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     </div>
   </section>
 
-  <section class="block" aria-labelledby="fun-heading">
+  <section class="block" aria-labelledby="learning-heading">
     <div class="section-head">
-      <h2 id="fun-heading">Beyond the README · personality leak</h2>
+      <h2 id="learning-heading">Learning & Practice</h2>
+      <a class="muted-note" href="/projects/"> View all » </a>
     </div>
-    <ul class="fun-list">
-      <li>
-        <strong>Food & culture:</strong>{' '}I treat great meals like distributed tracing—observe every span (appetizers count as sibling spans too).
-      </li>
-      <li>
-        <strong>Chess-ish thinking:</strong>{' '}I play badly on purpose occasionally so coworkers feel better—then ruthlessly refactor their PRs lovingly.
-      </li>
-      <li>
-        <strong>Urban wanderings:</strong>{' '}Walking Queens with headphones is practically load testing pedestrian APIs.
-      </li>
-      <li>
-        <strong>Humor policy:</strong>{' '}Dry wit in standups beats verbose status theater; caveat: does not indemnify against espresso-fueled rants about broken migrations.
-      </li>
-      <li>
-        <strong>Functional programming:</strong>{' '}Cats make me grin because math-shaped programs age better—but I refuse to fetishize purity over shipping safely.
-      </li>
-      <li>
-        <strong>Reminder:</strong>{' '}This section is lovingly tongue-in-cheek—recruiters skim above; humans scroll here deliberately.
-      </li>
-    </ul>
+    <div class="project-grid">
+      {
+        learning.map((p) => (
+          <article class="project-card">
+            <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
+              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
+            </a>
+            <div class="project-body">
+              {p.data.tags && p.data.tags.length > 0 && (
+                <div class="project-tags">
+                  {p.data.language && (
+                    <span class={`tag tag-language`}>{p.data.language}</span>
+                  )}
+                  {p.data.tags.map((tag) => (
+                    <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+                  ))}
+                </div>
+              )}
+              <h3>
+                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+              </h3>
+              <p class="project-lede">{p.data.subtitle}</p>
+            </div>
+            <div class="project-actions">
+              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+              {p.data.demo && (
+                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+                  Live Demo
+                </a>
+              )}
+              <a class="pill-link pill-muted" href={`/projects/${p.slug}/`}>
+                Details
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </section>
 
   <section class="block" aria-labelledby="education-heading">
@@ -249,10 +347,74 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     <article class="job-card">
       <div class="job-card-header">
         <div>
-          <div class="job-title">St. John’s University · B.S., Computer Science</div>
+          <div class="job-title">St. John's University · B.S., Computer Science</div>
           <div class="job-meta">Queens, NY · Aug 2016 – May 2020</div>
         </div>
       </div>
     </article>
+  </section>
+
+  <section class="block" aria-labelledby="about-heading">
+    <div class="section-head">
+      <h2 id="about-heading">When I'm Not Coding</h2>
+      <a class="muted-note" href="/about/"> More » </a>
+    </div>
+    <div class="interests-grid">
+      <article class="interest-card">
+        <div class="interest-visual">
+          <div class="interest-icon-large">⚽</div>
+        </div>
+        <div class="interest-content">
+          <h3>Football</h3>
+          <ul class="interest-list">
+            <li>Play pickup & league at Astoria Park</li>
+            <li>Liverpool supporter (Premier League)</li>
+            <li>Top 3: Messi, Neymar, Salah</li>
+          </ul>
+        </div>
+      </article>
+      
+      <article class="interest-card">
+        <div class="interest-visual">
+          <div class="interest-icon-large">🎮</div>
+        </div>
+        <div class="interest-content">
+          <h3>Gaming</h3>
+          <ul class="interest-list">
+            <li>RPGs & FPS on Xbox</li>
+            <li>GTA San Andreas (all-time #1)</li>
+            <li>Rainbow Six Siege & Expedition 33</li>
+          </ul>
+        </div>
+      </article>
+      
+      <article class="interest-card">
+        <div class="interest-visual">
+          <div class="interest-icon-large">🇪🇹</div>
+        </div>
+        <div class="interest-content">
+          <h3>Roots & Culture</h3>
+          <ul class="interest-list">
+            <li>Born in Addis Ababa, Ethiopia</li>
+            <li>Based in Queens, NY</li>
+            <li>Exploring NYC food & neighborhoods</li>
+          </ul>
+        </div>
+      </article>
+      
+      <article class="interest-card">
+        <div class="interest-visual">
+          <div class="interest-icon-large">λ</div>
+        </div>
+        <div class="interest-content">
+          <h3>FP Deep Dive</h3>
+          <ul class="interest-list">
+            <li>Building a chess engine in Scala</li>
+            <li>Working through Red Book exercises</li>
+            <li>Exploring functional patterns & immutability</li>
+          </ul>
+        </div>
+      </article>
+    </div>
   </section>
 </PageLayout>

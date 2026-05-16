@@ -1,45 +1,111 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
+import { enrichProjectsWithActivity } from '../../lib/github';
 
-const projects = (await getCollection('projects')).sort(
-  (a, b) => a.data.order - b.data.order,
+const allProjects = await getCollection('projects');
+const enrichedProjects = await enrichProjectsWithActivity(allProjects);
+const sortedProjects = enrichedProjects.sort((a, b) => a.data.order - b.data.order);
+
+const projects = sortedProjects.filter(p => 
+  p.data.tags.includes('Active') || p.data.tags.includes('Stale') || p.data.tags.includes('Demo')
+);
+
+const learning = sortedProjects.filter(p => 
+  p.data.tags.includes('Learning') && 
+  !p.data.tags.includes('Active') && 
+  !p.data.tags.includes('Stale') &&
+  !p.data.tags.includes('Demo')
 );
 ---
 
 <PageLayout
   title="Projects"
-  description="Older personal builds—routing, pragmatic auth boundaries, humane visuals—with links to repos and demos when they still behave."
+  description="Side projects, experiments, and learning explorations in backend development, functional programming, and data systems."
 >
-  <header class="section-head">
-    <h1>Projects</h1>
-  </header>
-  <p class="muted-note">Student-era seriousness still worth showing off—architecture lessons age better than hot takes tweets.</p>
-  <div class="project-grid" style="margin-top: 1rem">
-    {
-      projects.map((p) => (
-        <article class="project-card">
-          <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
-            <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
-          </a>
-          <div class="project-body">
-            <h2 style="margin: 0 0 0.4rem; font-size: 1.15rem">
-              <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
-            </h2>
-            <p class="project-lede">{p.data.subtitle}</p>
-          </div>
-          <div class="project-actions">
-            <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
-              GitHub
+  <section class="block" style="margin-bottom: 3rem">
+    <header class="section-head">
+      <h1>Projects</h1>
+    </header>
+    <div class="project-grid" style="margin-top: 1rem">
+      {
+        projects.map((p) => (
+          <article class="project-card">
+            <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
+              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
-            {p.data.demo && (
-              <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
-                Live demo
-              </a>
+          <div class="project-body">
+            {p.data.tags && p.data.tags.length > 0 && (
+              <div class="project-tags">
+                {p.data.language && (
+                  <span class={`tag tag-language`}>{p.data.language}</span>
+                )}
+                {p.data.tags.map((tag) => (
+                  <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+                ))}
+              </div>
             )}
-          </div>
-        </article>
-      ))
-    }
-  </div>
+            <h2 style="margin: 0 0 0.4rem; font-size: 1.15rem">
+                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+              </h2>
+              <p class="project-lede">{p.data.subtitle}</p>
+            </div>
+            <div class="project-actions">
+              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+              {p.data.demo && (
+                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+                  Live demo
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="block">
+    <header class="section-head">
+      <h2>Learning & Practice</h2>
+    </header>
+    <div class="project-grid" style="margin-top: 1rem">
+      {
+        learning.map((p) => (
+          <article class="project-card">
+            <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
+              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
+            </a>
+          <div class="project-body">
+            {p.data.tags && p.data.tags.length > 0 && (
+              <div class="project-tags">
+                {p.data.language && (
+                  <span class={`tag tag-language`}>{p.data.language}</span>
+                )}
+                {p.data.tags.map((tag) => (
+                  <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
+                ))}
+              </div>
+            )}
+            <h2 style="margin: 0 0 0.4rem; font-size: 1.15rem">
+                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+              </h2>
+              <p class="project-lede">{p.data.subtitle}</p>
+            </div>
+            <div class="project-actions">
+              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+              {p.data.demo && (
+                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+                  Live demo
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </PageLayout>
