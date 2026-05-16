@@ -9,6 +9,8 @@ const projects = defineCollection({
     demo: z.string().url().optional(),
     thumb: z.string(),
     order: z.number(),
+    tags: z.array(z.enum(['Active', 'Stale', 'Demo', 'Learning', 'Tool', 'Archived'])).default([]),
+    language: z.enum(['Scala', 'Python', 'Go', 'JavaScript', 'TypeScript', 'Rust', 'Other']).optional(),
   }),
 });
 

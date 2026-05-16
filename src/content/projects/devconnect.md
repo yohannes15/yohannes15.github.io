@@ -1,13 +1,14 @@
 ---
 title: DevConnect
-subtitle: >-
-  Student developer networking prototype: browse peers, explore skills/interests, and coordinate collaboration (Flask · React · PostgreSQL).
+subtitle: Student developer networking platform for connecting and collaborating. Built with Flask, React, and PostgreSQL.
 github: https://github.com/yohannes15/DeveloperMatchMaker
 demo: http://devconnect.pythonanywhere.com/login
 thumb: /projects/devconnect/visualize.gif
-order: 2
+order: 3
+tags: [Demo]
+language: Python
 ---
 
-Designed as St. John’s University–era lab work: registrations, relational profiles, and lightweight messaging primitives on top of a familiar web stack.
+A networking platform built for student developers at St. John's University to find collaborators for projects.
 
-The goal was less “novel algorithm” and more “ship a coherent workflow” end-to-end: auth-ish flows, sane data modeling, and a UI someone would actually poke at.
+Features include user profiles with skills and interests, project listings, and direct messaging between users. Built as a full-stack application with user authentication, relational data modeling, and a responsive React frontend.

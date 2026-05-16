@@ -1,13 +1,14 @@
 ---
 title: World Map Path Finder
-subtitle: >-
-  Pathfinding visualizer using OpenStreetMap node geodata: shortest-path search on real maps with a visual playground for classic algorithms (Django · DRF · React).
+subtitle: Pathfinding visualizer using OpenStreetMap data to demonstrate shortest-path algorithms on real-world maps. Built with Django, DRF, and React.
 github: https://github.com/yohannes15/AddisMap
 demo: http://addismap.pythonanywhere.com/
 thumb: /projects/addismap/top_image.gif
-order: 1
+order: 2
+tags: [Active, Demo]
+language: Python
 ---
 
-This project stitches together GIS-style map data with pathfinding primitives you’d recognize from any algorithms course—but with a richer “what if intersections worked like real streets?” framing.
+A pathfinding visualization tool that uses OpenStreetMap node geodata to find and display the shortest path between two points on a real map. 
 
-Algorithms are interchangeable in the UI, so comparisons feel immediate instead of textbook-abstract.
+Supports multiple pathfinding algorithms (Dijkstra, A*, etc.) with visual step-by-step execution to compare their performance and behavior on actual geographic data.
