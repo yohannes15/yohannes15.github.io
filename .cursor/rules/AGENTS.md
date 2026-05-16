@@ -6,6 +6,8 @@ Personal portfolio built with **Astro** + **TypeScript** + vanilla CSS. Deployed
 
 **Purpose**: Showcase backend work, Scala/FP learning, personal interests.
 
+**Projects**: Automated via GitHub API - tag repos with `portfolio` topic + add `.github/portfolio-thumb.png`.
+
 ---
 
 ## Standards
@@ -38,6 +40,7 @@ Personal portfolio built with **Astro** + **TypeScript** + vanilla CSS. Deployed
 **Content**:
 - Professional but personal tone (match `resume.tex`)
 - No robotic or cutesy wording
+- Projects sourced from GitHub API (see `src/lib/github-projects.ts`)
 
 ---
 
@@ -94,30 +97,36 @@ Then spawns subagent with clear instructions. Reviews output, approves or reques
 
 ```
 src/
-├── content/projects/  # Project markdown
-├── layouts/           # Page layouts
-├── lib/              # TS utilities
-├── pages/            # Routes
-└── styles/           # Global CSS
+├── config/projects.ts    # GitHub API config
+├── content/projects/     # Optional manual overrides
+├── layouts/              # Page layouts
+├── lib/
+│   └── github-projects.ts # GitHub API integration
+├── pages/                # Routes
+└── styles/               # Global CSS
 
-public/               # Static assets
+public/                   # Static assets
 ```
 
 ---
 
 ## Common Patterns
 
-**New project**: Create MD in `src/content/projects/`, add thumb to `public/projects/{slug}/`
+**New project**: Tag GitHub repo with `portfolio` topic, add `.github/portfolio-thumb.{png,jpg,svg}`
+
+**Override project data**: Create MD in `src/content/projects/{repo-name}.md` (optional)
 
 **Resume updates**: Edit `~/development/Resume/resume.tex` (source of truth), sync to `src/pages/resume/index.md` (no phone)
 
 **Assets**: Go in `public/`, reference as `/path/to/asset.png`
 
+**Config**: Edit `src/config/projects.ts` for GitHub API settings
+
 ---
 
 ## Current State
 
-Recently migrated from gitfolio to Astro. Split projects into "Projects" vs "Learning & Practice". GitHub activity tracking (Active/Stale). SVG icons via Heroicons.
+Recently migrated from gitfolio to Astro. Projects now **fully automated via GitHub API** - tag repos with `portfolio` topic, add thumbnails to `.github/` in each repo. Build fetches fresh data at deploy time.
 
 ---
 

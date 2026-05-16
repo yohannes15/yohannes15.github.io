@@ -1,24 +1,26 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import type { CollectionEntry } from 'astro:content';
-import { getCollection, render } from 'astro:content';
+import { getPortfolioProjects } from '../../lib/github-projects';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('projects');
-  return entries.map((project) => ({
+  const projects = await getPortfolioProjects();
+  return projects.map((project) => ({
     params: { slug: project.slug },
     props: { project },
   }));
 }
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: Awaited<ReturnType<typeof getPortfolioProjects>>[number];
 }
 
 const { project } = Astro.props;
 
-const { title, subtitle, github, demo, thumb } = project.data;
-const { Content } = await render(project);
+const { title, subtitle, github, demo, thumb, content } = project;
+
+// Render markdown content to HTML
+const htmlContent = marked.parse(content);
 ---
 
 <PageLayout title={title} description={subtitle}>
@@ -41,8 +43,6 @@ const { Content } = await render(project);
       </div>
     </header>
     <img class="project-hero-thumb" src={thumb} alt="" width="960" height="540" loading="eager" />
-    <div class="prose" style="margin-top: 1.35rem">
-      <Content />
-    </div>
+    <div class="prose" style="margin-top: 1.35rem" set:html={htmlContent} />
   </article>
 </PageLayout>

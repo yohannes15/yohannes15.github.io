@@ -1,21 +1,18 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { getCollection } from 'astro:content';
-import { enrichProjectsWithActivity } from '../lib/github';
+import { getPortfolioProjects } from '../lib/github-projects';
 
-const allProjects = await getCollection('projects');
-const enrichedProjects = await enrichProjectsWithActivity(allProjects);
-const sortedProjects = enrichedProjects.sort((a, b) => a.data.order - b.data.order);
+const allProjects = await getPortfolioProjects();
 
-const projects = sortedProjects.filter(p => 
-  p.data.tags.includes('Active') || p.data.tags.includes('Stale') || p.data.tags.includes('Demo')
+const projects = allProjects.filter(p => 
+  p.tags.includes('Active') || p.tags.includes('Stale') || p.tags.includes('Demo')
 );
 
-const learning = sortedProjects.filter(p => 
-  p.data.tags.includes('Learning') && 
-  !p.data.tags.includes('Active') && 
-  !p.data.tags.includes('Stale') &&
-  !p.data.tags.includes('Demo')
+const learning = allProjects.filter(p => 
+  p.tags.includes('Learning') && 
+  !p.tags.includes('Active') && 
+  !p.tags.includes('Stale') &&
+  !p.tags.includes('Demo')
 );
 
 const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'Go', 'AWS · GCP'];
@@ -272,30 +269,30 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         projects.map((p) => (
           <article class="project-card">
             <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
-              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
+              <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
             <div class="project-body">
-              {p.data.tags && p.data.tags.length > 0 && (
+              {p.tags && p.tags.length > 0 && (
                 <div class="project-tags">
-                  {p.data.language && (
-                    <span class={`tag tag-language`}>{p.data.language}</span>
+                  {p.language && (
+                    <span class={`tag tag-language`}>{p.language}</span>
                   )}
-                  {p.data.tags.map((tag) => (
+                  {p.tags.map((tag) => (
                     <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
                   ))}
                 </div>
               )}
               <h3>
-                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+                <a href={`/projects/${p.slug}/`}>{p.title}</a>
               </h3>
-              <p class="project-lede">{p.data.subtitle}</p>
+              <p class="project-lede">{p.subtitle}</p>
             </div>
             <div class="project-actions">
-              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+              <a class="pill-link" href={p.github} target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
-              {p.data.demo && (
-                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+              {p.demo && (
+                <a class="pill-link pill-muted" href={p.demo} target="_blank" rel="noopener noreferrer">
                   Live Demo
                 </a>
               )}
@@ -319,30 +316,30 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         learning.map((p) => (
           <article class="project-card">
             <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
-              <img src={p.data.thumb} alt="" width="640" height="360" loading="lazy" />
+              <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
             <div class="project-body">
-              {p.data.tags && p.data.tags.length > 0 && (
+              {p.tags && p.tags.length > 0 && (
                 <div class="project-tags">
-                  {p.data.language && (
-                    <span class={`tag tag-language`}>{p.data.language}</span>
+                  {p.language && (
+                    <span class={`tag tag-language`}>{p.language}</span>
                   )}
-                  {p.data.tags.map((tag) => (
+                  {p.tags.map((tag) => (
                     <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
                   ))}
                 </div>
               )}
               <h3>
-                <a href={`/projects/${p.slug}/`}>{p.data.title}</a>
+                <a href={`/projects/${p.slug}/`}>{p.title}</a>
               </h3>
-              <p class="project-lede">{p.data.subtitle}</p>
+              <p class="project-lede">{p.subtitle}</p>
             </div>
             <div class="project-actions">
-              <a class="pill-link" href={p.data.github} target="_blank" rel="noopener noreferrer">
+              <a class="pill-link" href={p.github} target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
-              {p.data.demo && (
-                <a class="pill-link pill-muted" href={p.data.demo} target="_blank" rel="noopener noreferrer">
+              {p.demo && (
+                <a class="pill-link pill-muted" href={p.demo} target="_blank" rel="noopener noreferrer">
                   Live Demo
                 </a>
               )}
