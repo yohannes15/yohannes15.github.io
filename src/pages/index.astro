@@ -5,16 +5,11 @@ import { getPortfolioProjects } from '../lib/github-projects';
 const allProjects = await getPortfolioProjects();
 
 const projects = allProjects.filter(p => 
-  p.tags.includes('Active') || 
-  p.tags.includes('Stale') || 
-  p.tags.includes('Demo') ||
-  p.tags.includes('Showcase')
+  p.tags.includes('Demo') || p.tags.includes('Showcase')
 );
 
 const learning = allProjects.filter(p => 
   p.tags.includes('Learning') && 
-  !p.tags.includes('Active') && 
-  !p.tags.includes('Stale') &&
   !p.tags.includes('Demo') &&
   !p.tags.includes('Showcase')
 );
@@ -270,7 +265,7 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     </div>
     <div class="project-grid">
       {
-        projects.map((p) => (
+        projects.slice(0, 3).map((p) => (
           <article class="project-card">
             <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
               <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />
@@ -317,7 +312,7 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     </div>
     <div class="project-grid">
       {
-        learning.map((p) => (
+        learning.slice(0, 3).map((p) => (
           <article class="project-card">
             <a class="project-thumb-wrap" href={`/projects/${p.slug}/`} tabindex="-1" aria-hidden="true">
               <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />

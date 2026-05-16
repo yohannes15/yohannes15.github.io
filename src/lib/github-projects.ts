@@ -121,23 +121,42 @@ async function getPortfolioContent(
 }
 
 /**
- * Calculate project score based on stars and recency
+ * Fetch commit count for the last month
  */
-function calculateScore(stars: number, updatedAt: string): number {
+async function fetchCommitCount(owner: string, repo: string): Promise<number> {
+  try {
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const since = oneMonthAgo.toISOString();
+    
+    const response = await fetch(
+      `${GITHUB_API_BASE}/repos/${owner}/${repo}/commits?since=${since}&per_page=100`,
+      { headers }
+    );
+    
+    if (!response.ok) return 0;
+    
+    const commits = await response.json();
+    return Array.isArray(commits) ? commits.length : 0;
+  } catch {
+    return 0;
+  }
+}
+
+/**
+ * Calculate project score based on stars (25%) and commits in last month (75%)
+ */
+async function calculateScore(owner: string, repo: string, stars: number): Promise<number> {
   const { scoreWeights } = projectsConfig;
   
-  const now = new Date();
-  const updated = new Date(updatedAt);
-  const monthsSinceUpdate = (now.getTime() - updated.getTime()) / (1000 * 60 * 60 * 24 * 30);
+  const commitCount = await fetchCommitCount(owner, repo);
   
-  // Recency score: 12 points if updated today, 0 if updated 12+ months ago
-  const recencyScore = Math.max(0, 12 - monthsSinceUpdate);
-  
-  // Normalize and weight
+  // Normalize: stars can be unbounded, but we'll use raw values
+  // Commit score: more commits = higher score (linear)
   const starScore = stars * scoreWeights.stars;
-  const recencyWeightedScore = recencyScore * scoreWeights.recency;
+  const commitScore = commitCount * scoreWeights.commits;
   
-  return starScore + recencyWeightedScore;
+  return starScore + commitScore;
 }
 
 /**
@@ -209,13 +228,12 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
       );
       
       // Calculate score and tags
-      const score = calculateScore(repo.stargazers_count, repo.updated_at);
+      const [owner, repoName] = repo.full_name.split('/');
+      const score = await calculateScore(owner, repoName, repo.stargazers_count);
       const tags = mapTopicsToTags(repo.topics);
       
-      // Always add activity tag (Active/Stale) for non-demo projects
-      if (!tags.includes('Demo')) {
-        tags.push(getActivityTag(repo.updated_at));
-      }
+      // Add activity tag to all projects (just metadata, doesn't affect placement)
+      tags.push(getActivityTag(repo.updated_at));
       
       projects.push({
         slug: repo.name,

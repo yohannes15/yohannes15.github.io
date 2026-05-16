@@ -26,16 +26,17 @@ export const projectsConfig = {
     'advent-of-code': 'Advent of Code',
     'log-sentinel': 'Log Sentinel',
     'chess-engine': 'Chess Engine',
+    'scala-learning-path': 'Scala Learning Path',
   } as const,
   
   // Score calculation weights (must sum to 1.0)
   scoreWeights: {
-    stars: 0.6,
-    recency: 0.4,
+    stars: 0.25,
+    commits: 0.75,
   },
   
   // Activity threshold (months)
-  staleThresholdMonths: 6,
+  staleThresholdMonths: 3,
   
   // Valid image extensions to check in .github/
   imageExtensions: ['png', 'jpg', 'jpeg', 'svg', 'gif'],
