@@ -21,7 +21,7 @@ export const projectsConfig = {
   repoTitleMap: {
     'AddisMap': 'World Map Path Finder',
     'DeveloperMatchMaker': 'DevConnect',
-    'fp-in-scala-red-book': 'Red Book Exercises',
+    'fp-in-scala-red-book': 'Functional Programming In Scala - (Red Book)',
     'advent-of-code': 'Advent of Code',
     'log-sentinel': 'Log Sentinel',
     'chess-engine': 'Chess Engine',

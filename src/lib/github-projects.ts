@@ -212,8 +212,8 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
       const score = calculateScore(repo.stargazers_count, repo.updated_at);
       const tags = mapTopicsToTags(repo.topics);
       
-      // Add activity tag if not explicitly learning
-      if (!tags.includes('Learning')) {
+      // Always add activity tag (Active/Stale) for non-demo projects
+      if (!tags.includes('Demo')) {
         tags.push(getActivityTag(repo.updated_at));
       }
       
