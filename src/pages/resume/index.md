@@ -4,7 +4,7 @@ title: Resume
 description: Resume for Yohannes Berhane — Backend Software Engineer
 ---
 
-# Yohannes A. Berhane
+# Yohannes Berhane
 
 **Email:** y.berhane56@gmail.com  
 **LinkedIn:** [linkedin.com/in/yohannes-berhane](https://www.linkedin.com/in/yohannes-berhane/)  
