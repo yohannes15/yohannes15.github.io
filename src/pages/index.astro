@@ -42,6 +42,10 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         Expert in <strong>Python</strong> (Django, Flask, FastAPI) with growing proficiency in <strong>Scala</strong> (Cats, Cats Effect, Http4s) and <strong>Go</strong>. 
         Led infrastructure migrations handling 700K+ requests per day and scaled systems serving 15%+ of US independent mortgage originations.
       </p>
+      <div class="education-badge">
+        <span class="badge-icon">🎓</span>
+        <span><strong>B.S. Computer Science</strong> · St. John's University, Queens NY</span>
+      </div>
       <div class="contact-row">
         <a class="pill-link" href="mailto:y.berhane56@gmail.com"> Email </a>
         <a class="pill-link pill-muted" href="https://www.linkedin.com/in/yohannes-berhane/" target="_blank" rel="noopener noreferrer">
@@ -60,7 +64,7 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     <div class="section-head">
       <h2 id="exp-heading">Experience</h2>
     </div>
-    <div class="card-stack">
+    <div class="card-stack experience-timeline">
       <article class="job-card">
         <div class="job-card-header">
           <div>
@@ -173,10 +177,12 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
     </div>
     <div class="skills-grid">
       <article class="skill-card">
-        <div class="skill-icon">💻</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" width="28" height="28" />
+        </div>
         <h3>Languages</h3>
         <div class="skill-tags">
-          <span class="skill-tag skill-tag-primary">Python</span>
+          <span class="skill-tag">Python</span>
           <span class="skill-tag">Scala</span>
           <span class="skill-tag">Go</span>
           <span class="skill-tag">JavaScript</span>
@@ -186,7 +192,9 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       </article>
 
       <article class="skill-card">
-        <div class="skill-icon">🐍</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/django/092E20" alt="Django" width="28" height="28" />
+        </div>
         <h3>Python Stack</h3>
         <div class="skill-tags">
           <span class="skill-tag">Django</span>
@@ -199,7 +207,9 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       </article>
 
       <article class="skill-card">
-        <div class="skill-icon">λ</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/scala/DC322F" alt="Scala" width="28" height="28" />
+        </div>
         <h3>Scala & FP</h3>
         <div class="skill-tags">
           <span class="skill-tag">Cats</span>
@@ -210,7 +220,9 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       </article>
 
       <article class="skill-card">
-        <div class="skill-icon">☁️</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="AWS" width="28" height="28" />
+        </div>
         <h3>Cloud & Infra</h3>
         <div class="skill-tags">
           <span class="skill-tag">AWS</span>
@@ -222,7 +234,9 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       </article>
 
       <article class="skill-card">
-        <div class="skill-icon">🗄️</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" width="28" height="28" />
+        </div>
         <h3>Databases</h3>
         <div class="skill-tags">
           <span class="skill-tag">PostgreSQL</span>
@@ -234,7 +248,9 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       </article>
 
       <article class="skill-card">
-        <div class="skill-icon">🎨</div>
+        <div class="skill-icon">
+          <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" width="28" height="28" />
+        </div>
         <h3>Frontend</h3>
         <div class="skill-tags">
           <span class="skill-tag">React</span>
@@ -296,7 +312,7 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
   <section class="block" aria-labelledby="learning-heading">
     <div class="section-head">
       <h2 id="learning-heading">Learning & Practice</h2>
-      <a class="muted-note" href="/projects/"> View all » </a>
+      <a class="muted-note" href="/projects/#learning"> View all » </a>
     </div>
     <div class="project-grid">
       {
@@ -337,84 +353,6 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
           </article>
         ))
       }
-    </div>
-  </section>
-
-  <section class="block" aria-labelledby="education-heading">
-    <div class="section-head">
-      <h2 id="education-heading">Education</h2>
-    </div>
-    <article class="job-card">
-      <div class="job-card-header">
-        <div>
-          <div class="job-title">St. John's University · B.S., Computer Science</div>
-          <div class="job-meta">Queens, NY · Aug 2016 – May 2020</div>
-        </div>
-      </div>
-    </article>
-  </section>
-
-  <section class="block" aria-labelledby="about-heading">
-    <div class="section-head">
-      <h2 id="about-heading">When I'm Not Coding</h2>
-      <a class="muted-note" href="/about/"> More » </a>
-    </div>
-    <div class="interests-grid">
-      <article class="interest-card">
-        <div class="interest-visual">
-          <div class="interest-icon-large">⚽</div>
-        </div>
-        <div class="interest-content">
-          <h3>Football</h3>
-          <ul class="interest-list">
-            <li>Play pickup & league at Astoria Park</li>
-            <li>Liverpool supporter (Premier League)</li>
-            <li>Top 3: Messi, Neymar, Salah</li>
-          </ul>
-        </div>
-      </article>
-      
-      <article class="interest-card">
-        <div class="interest-visual">
-          <div class="interest-icon-large">🎮</div>
-        </div>
-        <div class="interest-content">
-          <h3>Gaming</h3>
-          <ul class="interest-list">
-            <li>RPGs & FPS on Xbox</li>
-            <li>GTA San Andreas (all-time #1)</li>
-            <li>Rainbow Six Siege & Expedition 33</li>
-          </ul>
-        </div>
-      </article>
-      
-      <article class="interest-card">
-        <div class="interest-visual">
-          <div class="interest-icon-large">🇪🇹</div>
-        </div>
-        <div class="interest-content">
-          <h3>Roots & Culture</h3>
-          <ul class="interest-list">
-            <li>Born in Addis Ababa, Ethiopia</li>
-            <li>Based in Queens, NY</li>
-            <li>Exploring NYC food & neighborhoods</li>
-          </ul>
-        </div>
-      </article>
-      
-      <article class="interest-card">
-        <div class="interest-visual">
-          <div class="interest-icon-large">λ</div>
-        </div>
-        <div class="interest-content">
-          <h3>FP Deep Dive</h3>
-          <ul class="interest-list">
-            <li>Building a chess engine in Scala</li>
-            <li>Working through Red Book exercises</li>
-            <li>Exploring functional patterns & immutability</li>
-          </ul>
-        </div>
-      </article>
     </div>
   </section>
 </PageLayout>
