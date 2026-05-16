@@ -4,10 +4,12 @@ const pathSegment = rawPath.replace(/\/$/, '') || '/';
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-current={pathSegment === '/' ? 'page' : undefined}>Yohannes Berhane</a>
-  <nav class="nav" aria-label="Primary">
-    <a href="/" aria-current={pathSegment === '/' ? 'page' : undefined}>Home</a>
-    <a href="/projects/" aria-current={pathSegment.startsWith('/projects') ? 'page' : undefined}>Projects</a>
-    <a href="/resume/" aria-current={pathSegment.startsWith('/resume') ? 'page' : undefined}>Résumé</a>
-  </nav>
+  <div class="site-header__inner">
+    <a class="brand" href="/" aria-current={pathSegment === '/' ? 'page' : undefined}>Yohannes Berhane</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/" aria-current={pathSegment === '/' ? 'page' : undefined}>Home</a>
+      <a href="/projects/" aria-current={pathSegment.startsWith('/projects') ? 'page' : undefined}>Projects</a>
+      <a href="/resume/" aria-current={pathSegment.startsWith('/resume') ? 'page' : undefined}>Résumé</a>
+    </nav>
+  </div>
 </header>

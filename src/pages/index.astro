@@ -1,10 +1,21 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
 import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
 const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'AWS · ECS · RDS/Aurora', 'GCP · Cloud Run'];
+
+const PROFILE_FILENAMES = ['profile.webp', 'profile.jpg', 'profile.jpeg', 'profile.png'] as const;
+let profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=4';
+for (const name of PROFILE_FILENAMES) {
+  if (fs.existsSync(path.join(process.cwd(), 'public', 'images', name))) {
+    profilePhoto = `/images/${name}`;
+    break;
+  }
+}
 ---
 
 <PageLayout
@@ -13,9 +24,9 @@ const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Htt
   <section class="hero" aria-labelledby="intro-heading">
     <img
       class="avatar"
-      src="https://avatars.githubusercontent.com/u/48221308?v=4"
-      width="112"
-      height="112"
+      src={profilePhoto}
+      width="120"
+      height="120"
       alt="Portrait of Yohannes Berhane"
       loading="eager"
     />
