@@ -98,7 +98,6 @@ Then spawns subagent with clear instructions. Reviews output, approves or reques
 ```
 src/
 ├── config/projects.ts    # GitHub API config
-├── content/projects/     # Optional manual overrides
 ├── layouts/              # Page layouts
 ├── lib/
 │   └── github-projects.ts # GitHub API integration
@@ -113,8 +112,6 @@ public/                   # Static assets
 ## Common Patterns
 
 **New project**: Tag GitHub repo with `portfolio` topic, add `.github/portfolio-thumb.{png,jpg,svg}`
-
-**Override project data**: Create MD in `src/content/projects/{repo-name}.md` (optional)
 
 **Resume updates**: Edit `~/development/Resume/resume.tex` (source of truth), sync to `src/pages/resume/index.md` (no phone)
 

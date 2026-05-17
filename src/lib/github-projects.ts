@@ -305,15 +305,3 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
   
   return projects;
 }
-
-/**
- * Check for manual override in content collection
- */
-export async function getManualOverride(slug: string): Promise<string | null> {
-  try {
-    const module = await import(`../content/projects/${slug}.md`);
-    return module.compiledContent?.() || null;
-  } catch {
-    return null;
-  }
-}
