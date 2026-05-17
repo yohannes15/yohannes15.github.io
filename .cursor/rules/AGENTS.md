@@ -4,7 +4,7 @@
 
 Personal portfolio built with **Astro** + **TypeScript** + vanilla CSS. Deployed to GitHub Pages.
 
-**Purpose**: Showcase backend work, Scala/FP learning, personal interests.
+**Purpose**: Showcase backend work, current focus, learning and personal interests.
 
 **Projects**: Automated via GitHub API - tag repos with `portfolio` topic + add `.github/portfolio-thumb.png`.
 
