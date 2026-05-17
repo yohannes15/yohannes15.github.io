@@ -9,7 +9,10 @@ export interface GitHubRepo {
   topics: string[];
   stargazers_count: number;
   language: string | null;
+  /** Any repository activity (issues, etc.), not necessarily a commit. */
   updated_at: string;
+  /** Timestamp of the last push — closest to “last commit” in the API. */
+  pushed_at: string | null;
   default_branch: string;
 }
 
@@ -25,6 +28,25 @@ export interface PortfolioProject {
   language: string | null;
   score: number;
   order: number;
+  /** ISO 8601; from GitHub `pushed_at`, or `updated_at` if push time is missing. */
+  lastPushAt: string;
+}
+
+/** Topic tags shown on cards; `Learning` is implied by section placement. */
+export function tagsForProjectCard(tags: string[] | undefined): string[] {
+  if (!tags) return [];
+  return tags.filter((t) => t !== 'Learning');
+}
+
+/** Human-readable date for card UI (ISO string from GitHub). */
+export function formatLastPushDate(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 }
 
 const GITHUB_API_BASE = 'https://api.github.com';
@@ -240,9 +262,10 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
       const [owner, repoName] = repo.full_name.split('/');
       const score = await calculateScore(owner, repoName, repo.stargazers_count);
       const tags = mapTopicsToTags(repo.topics);
-      
+      const lastPushIso = repo.pushed_at || repo.updated_at;
+
       // Add activity tag to all projects (just metadata, doesn't affect placement)
-      tags.push(getActivityTag(repo.updated_at));
+      tags.push(getActivityTag(lastPushIso));
       
       projects.push({
         slug: repo.name,
@@ -260,6 +283,7 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
         language: repo.language,
         score,
         order: 0, // Will be set after sorting
+        lastPushAt: lastPushIso,
       });
     } catch (error) {
       // Thumbnail missing or other error - fail build

@@ -1,6 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import { getPortfolioProjects } from '../lib/github-projects';
+import { getPortfolioProjects, tagsForProjectCard, formatLastPushDate } from '../lib/github-projects';
 
 const allProjects = await getPortfolioProjects();
 
@@ -17,6 +17,77 @@ const learning = allProjects.filter(p =>
 const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'Go', 'AWS · GCP'];
 
 const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
+
+type SkillItem = { name: string; src: string; alt: string; level: number };
+
+const skillCategories: { title: string; context?: { label: string; hint: string }; items: SkillItem[] }[] = [
+  {
+    title: 'Languages',
+    items: [
+      { name: 'Python',     src: 'https://cdn.simpleicons.org/python/3776AB',     alt: 'Python',     level: 90 },
+      { name: 'Scala',      src: 'https://cdn.simpleicons.org/scala/DC322F',      alt: 'Scala',      level: 65 },
+      { name: 'C#',         src: '/logos/csharp-logo.svg',                        alt: 'C#',         level: 60 },
+      { name: 'TypeScript', src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', level: 40 },
+      { name: 'Go',         src: 'https://cdn.simpleicons.org/go/00ADD8',         alt: 'Go',         level: 30 },
+    ],
+  },
+  {
+    title: 'Backend',
+    items: [
+      { name: 'Django',    src: 'https://cdn.simpleicons.org/django/092E20',   alt: 'Django',    level: 90 },
+      { name: 'Flask',     src: 'https://cdn.simpleicons.org/flask/000000',    alt: 'Flask',     level: 80 },
+      { name: 'FastAPI',   src: 'https://cdn.simpleicons.org/fastapi/009688',  alt: 'FastAPI',   level: 60 },
+      { name: 'Http4s',    src: 'https://http4s.org/images/http4s-logo.svg',   alt: 'Http4s',    level: 55 },
+      { name: '.NET Core', src: 'https://cdn.simpleicons.org/dotnet/512BD4',   alt: '.NET Core', level: 40 },
+    ],
+  },
+  {
+    title: 'Frontend',
+    context: {
+      label: 'Earlier roles',
+      hint: 'Skills from earlier roles, usable when needed, not where I am focused now.',
+    },
+    items: [
+      { name: 'HTML/CSS',   src: 'https://cdn.simpleicons.org/html5/E34F26',          alt: 'HTML/CSS',   level: 70 },
+      { name: 'Tailwind',   src: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',    alt: 'Tailwind',   level: 65 },
+      { name: 'HTMX',       src: 'https://cdn.simpleicons.org/htmx/3366CC',           alt: 'HTMX',       level: 65 },
+      { name: 'Alpine.js',  src: 'https://cdn.simpleicons.org/alpinedotjs/8BC0D0',    alt: 'Alpine.js',  level: 60 },
+      { name: 'React',      src: 'https://cdn.simpleicons.org/react/61DAFB',          alt: 'React',      level: 50 },
+    ],
+  },
+  {
+    title: 'Cloud & Infrastructure',
+    items: [
+      { name: 'Docker',          src: 'https://cdn.simpleicons.org/docker/2496ED',       alt: 'Docker',          level: 80 },
+      { name: 'GCP',             src: '/logos/gcp-logo.svg',                             alt: 'GCP',             level: 70 },
+      { name: 'AWS',             src: '/logos/aws-logo.png',                             alt: 'AWS',             level: 70 },
+      { name: 'GH Actions',  src: 'https://cdn.simpleicons.org/githubactions/2088FF',alt: 'GitHub Actions',  level: 60 },
+      { name: 'Terraform',       src: 'https://cdn.simpleicons.org/terraform/7B42BC',    alt: 'Terraform',       level: 45 },
+      { name: 'Scalr',           src: '/logos/scalr-logo.svg',                           alt: 'Scalr',           level: 40 },
+    ],
+  },
+  {
+    title: 'Databases',
+    items: [
+      { name: 'PostgreSQL', src: 'https://cdn.simpleicons.org/postgresql/4169E1', alt: 'PostgreSQL', level: 85 },
+      { name: 'Redis',      src: 'https://cdn.simpleicons.org/redis/DC382D',      alt: 'Redis',      level: 75 },
+      { name: 'DynamoDB',   src: '/logos/dynamodb-logo.png',                      alt: 'DynamoDB',   level: 60 },
+      { name: 'Snowflake',  src: 'https://cdn.simpleicons.org/snowflake/29B5E8',  alt: 'Snowflake',  level: 50 },
+      { name: 'MongoDB',    src: 'https://cdn.simpleicons.org/mongodb/47A248',    alt: 'MongoDB',    level: 35 },
+    ],
+  },
+  {
+    title: 'Tools & Libraries',
+    items: [
+      { name: 'Pytest',   src: 'https://cdn.simpleicons.org/pytest/0A9EDC',   alt: 'Pytest',              level: 80 },
+      { name: 'Cats & CE',src: '/logos/cats-logo.png',                        alt: 'Cats & Cats Effect',  level: 65 },
+      { name: 'Pandas',   src: '/logos/pandas-logo.svg',                      alt: 'Pandas',              level: 60 },
+      { name: 'Datadog',  src: 'https://cdn.simpleicons.org/datadog/632CA6',  alt: 'Datadog',             level: 50 },
+      { name: 'FS2',      src: 'https://cdn.simpleicons.org/scala/DC322F',    alt: 'FS2',                 level: 45 },
+      { name: 'Celery',   src: 'https://cdn.simpleicons.org/celery/37814A',   alt: 'Celery',              level: 45 },
+    ],
+  },
+];
 ---
 
 <PageLayout
@@ -99,14 +170,18 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         </div>
         <ul class="exp-list">
           <li>
-            Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora. 
-            Implemented infrastructure as code with Terraform to eliminate manual overhead and improve reliability.
+            Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora;
+            implemented IaC with Terraform to eliminate manual overhead and improve reliability.
           </li>
           <li>
-            Developed internal rule-based decision engines using Scala, Cats, and Http4s. Managed partner integrations via a high-throughput Django REST platform.
+            Developed internal rule-based decision engines using Scala, Cats, and Http4s, while managing partner integrations via a
+            high-throughput Django REST platform.
           </li>
           <li>
-            Designed a data pipeline (Snowflake → S3 → Lambda → SQS) to process over 5 million leads monthly for automated offer refreshes.
+            Designed a data pipeline (Snowflake → S3 → Lambda → SQS → application) to process over 5 million leads monthly for automated offer refreshes.
+          </li>
+          <li>
+            Supported a decisioning platform for credit card partners, enabling secure execution of partner-provided decision engines via containerized environments.
           </li>
         </ul>
       </article>
@@ -140,15 +215,21 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
         </div>
         <ul class="exp-list">
           <li>
-            Led design and development of high-performance Django and Flask applications serving over 15% of US independent mortgage originations. 
-            Utilized HTMX, Alpine.js, React, and Tailwind CSS for modern frontend experiences.
+            Led the design and development of high-performance Django and Flask applications, serving over 15% of all US independent mortgage originations;
+            utilized a modern frontend stack of HTMX, Alpine.js, and React with Tailwind CSS.
           </li>
           <li>
-            Orchestrated migration to a microservices-based architecture for the loan optimization engine, leveraging asyncio, threading, 
-            and distributed tasks via Google Cloud Tasks and Jobs.
+            Orchestrated the migration to a microservices-based architecture for the loan optimization engine, leveraging asyncio, threading,
+            and distributed tasks via Google Cloud Tasks/Jobs.
           </li>
           <li>
-            Redesigned and normalized legacy database schemas, resulting in a 200% improvement in query performance.
+            Engineered and maintained robust RESTful APIs using Django REST Framework, ensuring high availability and secure data processing.
+          </li>
+          <li>
+            Redesigned and normalized legacy database schemas, resulting in a 200% improvement in query performance and overall system efficiency.
+          </li>
+          <li>
+            Managed large-scale cloud deployments on GCP using Terraform (IaC), while establishing comprehensive testing standards with Pytest.
           </li>
           <li>
             Mentored a team of 3-5 developers, driving technical decisions, conducting code reviews, and steering the product roadmap.
@@ -189,7 +270,13 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
             Automated CI/CD pipelines using Jenkins, Python, and Chef, reducing deployment times by 15%.
           </li>
           <li>
-            Enhanced SQL Server database performance, reducing query response times by 30%.
+            Modernized REST and SOAP services using ASP.NET Web APIs, ensuring high availability with blue-green deployment strategies.
+          </li>
+          <li>
+            Wrote unit tests for APIs using NUnit and XUnit, achieving 85% code coverage.
+          </li>
+          <li>
+            Enhanced SQL Server database transactions and performance, reducing query response times by 30%.
           </li>
         </ul>
       </article>
@@ -222,161 +309,49 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
       <h2 id="skills-heading">Technical Skills</h2>
     </div>
     <div class="skills-grid-new">
-      <article class="skill-category">
-        <h3>Languages</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" width="32" height="32" />
-            <span>Python</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%"></div></div>
+      {skillCategories.map((category) => (
+        <article class="skill-category">
+          <div class="skill-category-heading">
+            <h3>{category.title}</h3>
+            {category.context && (
+              <span
+                class="skill-category-context"
+                data-hint={category.context.hint}
+                aria-label={`${category.context.label}. ${category.context.hint}`}
+                role="note"
+                tabindex="0"
+              >
+                <svg
+                  class="skill-category-context-icon"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h18.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <path d="M12 9v4" />
+                  <path d="M12 17h.01" />
+                </svg>
+                <span class="skill-category-context-label">{category.context.label}</span>
+              </span>
+            )}
           </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/scala/DC322F" alt="Scala" width="32" height="32" />
-            <span>Scala</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 55%"></div></div>
+          <div class="skill-logos">
+            {category.items.map((skill) => (
+              <div class="skill-logo-item">
+                <img src={skill.src} alt={skill.alt} width="32" height="32" />
+                <span>{skill.name}</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style={`width: ${skill.level}%`}></div></div>
+              </div>
+            ))}
           </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" width="32" height="32" />
-            <span>JavaScript</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="SQL" width="32" height="32" />
-            <span>SQL</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%"></div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="skill-category">
-        <h3>Python Ecosystem</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/django/092E20" alt="Django" width="32" height="32" />
-            <span>Django</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/flask/000000" alt="Flask" width="32" height="32" />
-            <span>Flask</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/fastapi/009688" alt="FastAPI" width="32" height="32" />
-            <span>FastAPI</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/pytest/0A9EDC" alt="Pytest" width="32" height="32" />
-            <span>Pytest</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/celery/37814A" alt="Celery" width="32" height="32" />
-            <span>Celery</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 60%"></div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="skill-category">
-        <h3>Scala & FP</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="/logos/cats-logo.png" alt="Cats & Cats Effect" width="32" height="32" />
-            <span>Cats & CE</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 55%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://http4s.org/images/http4s-logo.svg" alt="Http4s" width="32" height="32" />
-            <span>Http4s</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 55%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/scala/DC322F" alt="FS2" width="32" height="32" />
-            <span>FS2</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 45%"></div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="skill-category">
-        <h3>Cloud & Infrastructure</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="/logos/aws-logo.png" alt="AWS" width="32" height="32" />
-            <span>AWS</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/googlecloud/4285F4" alt="GCP" width="32" height="32" />
-            <span>GCP</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" width="32" height="32" />
-            <span>Terraform</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 65%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="32" height="32" />
-            <span>Docker</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="skill-category">
-        <h3>Databases</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="PostgreSQL" width="32" height="32" />
-            <span>PostgreSQL</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/redis/DC382D" alt="Redis" width="32" height="32" />
-            <span>Redis</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 60%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="/logos/dynamodb-logo.png" alt="DynamoDB" width="32" height="32" />
-            <span>DynamoDB</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/snowflake/29B5E8" alt="Snowflake" width="32" height="32" />
-            <span>Snowflake</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 55%"></div></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="skill-category">
-        <h3>Frontend</h3>
-        <div class="skill-logos">
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" width="32" height="32" />
-            <span>React</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 50%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/htmx/3366CC" alt="HTMX" width="32" height="32" />
-            <span>HTMX</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 65%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/alpinedotjs/8BC0D0" alt="Alpine.js" width="32" height="32" />
-            <span>Alpine.js</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 60%"></div></div>
-          </div>
-          <div class="skill-logo-item">
-            <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind" width="32" height="32" />
-            <span>Tailwind</span>
-            <div class="skill-bar"><div class="skill-bar-fill" style="width: 65%"></div></div>
-          </div>
-        </div>
-      </article>
+        </article>
+      ))}
     </div>
   </section>
 
@@ -393,12 +368,12 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
               <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
             <div class="project-body">
-              {p.tags && p.tags.length > 0 && (
+              {(p.language || tagsForProjectCard(p.tags).length > 0) && (
                 <div class="project-tags">
                   {p.language && (
                     <span class={`tag tag-language`}>{p.language}</span>
                   )}
-                  {p.tags.map((tag) => (
+                  {tagsForProjectCard(p.tags).map((tag) => (
                     <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
                   ))}
                 </div>
@@ -407,13 +382,20 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
                 <a href={`/projects/${p.slug}/`}>{p.title}</a>
               </h3>
               <p class="project-lede">{p.subtitle}</p>
+              <p class="project-last-push">
+                Last push{' '}
+                <time datetime={p.lastPushAt}>{formatLastPushDate(p.lastPushAt)}</time>
+              </p>
             </div>
             <div class="project-actions">
               <a class="pill-link" href={p.github} target="_blank" rel="noopener noreferrer">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
                 GitHub
               </a>
               {p.demo && (
-                <a class="pill-link pill-muted" href={p.demo} target="_blank" rel="noopener noreferrer">
+                <a class="pill-link pill-demo" href={p.demo} target="_blank" rel="noopener noreferrer">
                   Live Demo
                 </a>
               )}
@@ -440,12 +422,12 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
               <img src={p.thumb} alt="" width="640" height="360" loading="lazy" />
             </a>
             <div class="project-body">
-              {p.tags && p.tags.length > 0 && (
+              {(p.language || tagsForProjectCard(p.tags).length > 0) && (
                 <div class="project-tags">
                   {p.language && (
                     <span class={`tag tag-language`}>{p.language}</span>
                   )}
-                  {p.tags.map((tag) => (
+                  {tagsForProjectCard(p.tags).map((tag) => (
                     <span class={`tag tag-${tag.toLowerCase()}`}>{tag}</span>
                   ))}
                 </div>
@@ -454,13 +436,20 @@ const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
                 <a href={`/projects/${p.slug}/`}>{p.title}</a>
               </h3>
               <p class="project-lede">{p.subtitle}</p>
+              <p class="project-last-push">
+                Last push{' '}
+                <time datetime={p.lastPushAt}>{formatLastPushDate(p.lastPushAt)}</time>
+              </p>
             </div>
             <div class="project-actions">
               <a class="pill-link" href={p.github} target="_blank" rel="noopener noreferrer">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
                 GitHub
               </a>
               {p.demo && (
-                <a class="pill-link pill-muted" href={p.demo} target="_blank" rel="noopener noreferrer">
+                <a class="pill-link pill-demo" href={p.demo} target="_blank" rel="noopener noreferrer">
                   Live Demo
                 </a>
               )}
