@@ -332,9 +332,17 @@ section.block:last-of-type {
   margin-bottom: 2rem;
 }
 
+section.block-compact {
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 768px) {
   section.block {
     margin-bottom: 3rem;
+  }
+  
+  section.block-compact {
+    margin-bottom: 2rem;
   }
 }
 
@@ -374,109 +382,316 @@ section.block:last-of-type {
   gap: 1rem;
 }
 
-/* Timeline gutter + connector line (Experience section only) */
-.experience-timeline {
-  position: relative;
-  padding-left: 1.375rem;
-}
-
-.experience-timeline::before {
-  content: '';
-  position: absolute;
-  left: 0.5625rem;
-  top: 1.625rem;
-  bottom: 1.625rem;
-  width: 1px;
-  background: color-mix(in srgb, var(--border) 55%, transparent);
-  pointer-events: none;
-}
-
-.experience-timeline .job-card {
-  position: relative;
-  border-left: 3px solid var(--accent);
-  border-right: 1px solid var(--border);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.job-card {
+/* Open Source Contribution Card */
+.contrib-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.75rem;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
 
-.job-card:hover {
+.contrib-card:hover {
   border-color: var(--accent-dim);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.1);
 }
 
-.job-card-header {
-  margin-bottom: 1.125rem;
-  padding-bottom: 0.875rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 58%, transparent);
+.contrib-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.job-title {
+.contrib-header img {
+  flex-shrink: 0;
+}
+
+.contrib-header h3 {
+  font-size: 1.125rem;
   font-weight: 600;
-  font-size: clamp(1.125rem, 1.08rem + 0.35vw, 1.25rem);
-  letter-spacing: -0.015em;
-  color: var(--text);
   margin: 0;
-  line-height: 1.3;
+  color: var(--text-bright);
+  flex: 1;
 }
 
-.job-meta {
-  color: var(--muted);
+.contrib-link {
+  color: var(--accent);
+  text-decoration: none;
   font-size: 0.875rem;
-  line-height: 1.5;
-  margin: 0.5rem 0 0;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
-.experience-timeline .job-card:hover {
-  border-left-color: var(--accent);
-  border-top-color: var(--accent-dim);
-  border-right-color: var(--accent-dim);
-  border-bottom-color: var(--accent-dim);
-  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.15);
+.contrib-link:hover {
+  color: var(--accent-hover);
 }
 
-@media (max-width: 480px) {
-  .experience-timeline {
-    padding-left: 1.125rem;
-  }
-
-  .experience-timeline::before {
-    left: 0.4375rem;
-    top: 1.5rem;
-    bottom: 1.5rem;
-  }
-
-  .job-card {
-    padding: 1.5rem;
-  }
+.contrib-desc {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.65;
 }
 
-.job-card ul {
+/* Experience Timeline */
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.exp-card:hover {
+  border-color: var(--accent-dim);
+  box-shadow: 0 8px 24px rgba(88, 166, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.exp-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.exp-company-logo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 4px;
+}
+
+.exp-company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.exp-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.exp-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text-bright);
+}
+
+.exp-company {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.exp-meta {
+  font-size: 0.875rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.exp-divider {
+  color: var(--border);
+}
+
+.exp-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+.exp-highlight {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.exp-highlight-value {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.exp-highlight-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 0.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.exp-list {
   margin: 0;
   padding-left: 1.5rem;
   color: var(--text);
 }
 
-.job-card li {
+.exp-list li {
   margin-bottom: 0.75rem;
   line-height: 1.65;
 }
 
-.job-card li:last-child {
+.exp-list li:last-child {
   margin-bottom: 0;
 }
 
+@media (max-width: 640px) {
+  .exp-highlights {
+    flex-direction: row;
+    gap: 1rem;
+    padding-left: 0;
+    margin-top: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .exp-highlight {
+    text-align: left;
+  }
+  
+  .exp-header {
+    flex-wrap: wrap;
+  }
+  
+  .exp-company-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .exp-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Technical Skills - New Layout */
+.skills-grid-new {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.skill-category {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+  border-color: var(--accent-dim);
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.skill-category h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--text-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}
+
+.skill-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: default;
+  min-width: 70px;
+  position: relative;
+}
+
+.skill-logo-item:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.skill-logo-item img {
+  filter: grayscale(20%);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.skill-logo-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}
+
+.skill-logo-item span {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Proficiency Progress Bar */
+.skill-bar {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .skills-grid-new {
+    grid-template-columns: 1fr;
+  }
+  
+  .skill-category {
+    padding: 1.25rem;
+  }
+  
+  .skill-logos {
+    gap: 0.75rem;
+  }
+  
+  .skill-logo-item {
+    min-width: 60px;
+    padding: 0.5rem;
+  }
+}
+
+/* Old skills grid - keep for backwards compat */
 .skills-grid {
   display: grid;
   gap: 1rem;

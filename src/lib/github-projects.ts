@@ -42,6 +42,9 @@ if (GITHUB_TOKEN) {
   headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
 }
 
+// Build-time cache to avoid refetching for multiple pages
+let projectsCache: PortfolioProject[] | null = null;
+
 /**
  * Fetch all repos for the user
  */
@@ -194,6 +197,12 @@ function mapTopicsToTags(topics: string[]): string[] {
  * Fetch and process all portfolio projects from GitHub
  */
 export async function getPortfolioProjects(username: string = 'yohannes15'): Promise<PortfolioProject[]> {
+  // Return cached results if available (for build-time optimization)
+  if (projectsCache) {
+    console.log('[Portfolio] Using cached projects (no API calls)');
+    return projectsCache;
+  }
+  
   const { requiredTopic, excludedRepos } = projectsConfig;
   
   console.log('[Portfolio] Fetching repos from GitHub...');
@@ -266,6 +275,9 @@ export async function getPortfolioProjects(username: string = 'yohannes15'): Pro
   });
   
   console.log(`[Portfolio] ✓ Successfully processed ${projects.length} projects`);
+  
+  // Cache for subsequent calls during build
+  projectsCache = projects;
   
   return projects;
 }
