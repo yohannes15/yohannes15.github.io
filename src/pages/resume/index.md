@@ -15,7 +15,7 @@ description: Resume for Yohannes Berhane — Backend Software Engineer
 
 ## Summary
 
-Backend Software Engineer with 6+ years building scalable distributed systems. Expert in **Python** (Django, Flask, FastAPI) with growing proficiency in **Scala** (Cats, Cats Effect, Http4s) and **Go**. Additional experience in **C#** and **JavaScript**. Led high-traffic migrations at Gen (700K+ requests/day) and scaled OptiFunder to serve 15%+ of US independent mortgage originations.
+Backend Software Engineer with 6+ years building scalable distributed systems. Highly skilled in **Python** (Django, Flask, FastAPI), comfortable with **TypeScript/JavaScript** and growing proficiency in **Go**. Led high-traffic application migrations at Gen (700K+ requests/day) and scaled OptiFunder to serve 15%+ of US independent mortgage originations.
 
 ---
 
@@ -24,15 +24,15 @@ Backend Software Engineer with 6+ years building scalable distributed systems. E
 ### Senior Software Engineer — Gen
 **Oct 2025 – May 2026 · New York, NY (Hybrid)**
 
-- **Infrastructure Migration**: Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora; implemented IaC with Terraform to eliminate manual overhead and improve reliability.
-- **Backend Engineering**: Developed internal rule-based decision engines using **Scala**, **Cats**, and **Http4s**, while managing partner integrations via a high-throughput **Django REST** platform.
+- **Infrastructure Migration**: Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora; implemented IaC with Terraform to improve reliability.
+- **Backend Engineering**: Managed partner integrations via a high-throughput **Django REST** platform and developed internal rule-based decision engines using **Scala**, **Cats**, and **Http4s**.
 - **Data Engineering**: Designed a data pipeline (Snowflake → S3 → Lambda → SQS → application) to process over 5 million leads monthly for automated offer refreshes.
 - **Containerization**: Supported a decisioning platform for credit card partners, enabling secure execution of partner-provided decision engines via containerized environments.
 
 ### OptiFunder — Senior Software Engineer (Promoted May 2023)
 **Sep 2021 – Oct 2025 · Remote, NY**
 
-- **Full-Stack Development**: Led the design and development of high-performance Django and Flask applications, serving over 15% of all US independent mortgage originations; utilized a modern frontend stack of HTMX, Alpine.js, and React with Tailwind CSS.
+- **Full-Stack Development**: Led design/development of high-performance Django/Flask applications, serving over 15% of all US independent mortgage originations; utilized a frontend stack of HTMX and React with Tailwind CSS.
 - **System Architecture**: Orchestrated the migration to a microservices-based architecture for the loan optimization engine, leveraging **asyncio**, threading, and distributed tasks via Google Cloud Tasks/Jobs.
 - **API & Backend Engineering**: Engineered and maintained robust RESTful APIs using Django REST Framework, ensuring high availability and secure data processing.
 - **Database Optimization**: Redesigned and normalized legacy database schemas, resulting in a 200% improvement in query performance and overall system efficiency.

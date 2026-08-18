@@ -14,7 +14,7 @@ const learning = allProjects.filter(p =>
   !p.tags.includes('Showcase')
 );
 
-const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'Scala · Cats · Http4s', 'Go', 'AWS · GCP'];
+const TECH_TAGS = ['Python · Django · Flask · FastAPI', 'TypeScript / JavaScript', 'Go', 'AWS · GCP'];
 
 const profilePhoto = 'https://avatars.githubusercontent.com/u/48221308?v=5';
 
@@ -25,10 +25,10 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
     title: 'Languages',
     items: [
       { name: 'Python',     src: 'https://cdn.simpleicons.org/python/3776AB',     alt: 'Python',     level: 90 },
-      { name: 'Scala',      src: 'https://cdn.simpleicons.org/scala/DC322F',      alt: 'Scala',      level: 65 },
+      { name: 'TypeScript', src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', level: 60 },
+      { name: 'Go',         src: 'https://cdn.simpleicons.org/go/00ADD8',         alt: 'Go',         level: 40 },
+      { name: 'Scala',      src: 'https://cdn.simpleicons.org/scala/DC322F',      alt: 'Scala',      level: 50 },
       { name: 'C#',         src: '/logos/csharp-logo.svg',                        alt: 'C#',         level: 60 },
-      { name: 'TypeScript', src: 'https://cdn.simpleicons.org/typescript/3178C6', alt: 'TypeScript', level: 40 },
-      { name: 'Go',         src: 'https://cdn.simpleicons.org/go/00ADD8',         alt: 'Go',         level: 30 },
     ],
   },
   {
@@ -91,7 +91,7 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
 ---
 
 <PageLayout
-  description="Backend engineer with 6+ years building scalable distributed systems in Python, Scala, and cloud infrastructure."
+  description="Backend engineer with 6+ years building scalable distributed systems in Python, TypeScript, and Go."
 >
   <section class="hero" aria-labelledby="intro-heading">
     <img
@@ -105,8 +105,8 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
     <div class="lede">
       <h1 id="intro-heading">Backend Software Engineer</h1>
       <p class="lede-sub">
-        Backend engineer with 6+ years building scalable distributed systems. 
-        Expert in <strong>Python</strong> (Django, Flask, FastAPI) with growing proficiency in <strong>Scala</strong> (Cats, Cats Effect, Http4s) and <strong>Go</strong>. 
+        Backend engineer with 6+ years building scalable distributed systems.
+        Highly skilled in <strong>Python</strong> (Django, Flask, FastAPI), comfortable with <strong>TypeScript/JavaScript</strong> and growing proficiency in <strong>Go</strong>.
         Led infrastructure migrations handling 700K+ requests per day and scaled systems serving 15%+ of US independent mortgage originations.
       </p>
       <div class="education-badge">
@@ -171,11 +171,11 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
         <ul class="exp-list">
           <li>
             Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora;
-            implemented IaC with Terraform to eliminate manual overhead and improve reliability.
+            implemented IaC with Terraform to improve reliability.
           </li>
           <li>
-            Developed internal rule-based decision engines using Scala, Cats, and Http4s, while managing partner integrations via a
-            high-throughput Django REST platform.
+            Managed partner integrations via a high-throughput Django REST platform and developed internal rule-based
+            decision engines using Scala, Cats, and Http4s.
           </li>
           <li>
             Designed a data pipeline (Snowflake → S3 → Lambda → SQS → application) to process over 5 million leads monthly for automated offer refreshes.
@@ -216,7 +216,7 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
         <ul class="exp-list">
           <li>
             Led the design and development of high-performance Django and Flask applications, serving over 15% of all US independent mortgage originations;
-            utilized a modern frontend stack of HTMX, Alpine.js, and React with Tailwind CSS.
+            utilized a frontend stack of HTMX and React with Tailwind CSS.
           </li>
           <li>
             Orchestrated the migration to a microservices-based architecture for the loan optimization engine, leveraging asyncio, threading,
