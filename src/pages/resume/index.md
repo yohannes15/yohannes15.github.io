@@ -15,7 +15,7 @@ description: Resume for Yohannes Berhane — Senior Software Engineer
 
 ## Summary
 
-Senior Software Engineer with 6+ years building scalable distributed systems. Highly skilled in **Python** (Django, Flask, FastAPI), comfortable with **TypeScript/JavaScript** and growing proficiency in **Go**. Led a cloud migration serving millions of requests per day and co-designed two mortgage funding products supporting 15%+ of US independent originations.
+Senior Software Engineer with 6+ years building scalable distributed systems. Highly skilled in **Python** (Django, Flask, FastAPI), comfortable with **TypeScript/JavaScript** and growing proficiency in **Go**. Led a cloud migration serving millions of requests per day and co-designed two mortgage funding products supporting 15%+ of US independent originations and billions of dollars of loans per month.
 
 ---
 
@@ -31,7 +31,7 @@ Senior Software Engineer with 6+ years building scalable distributed systems. Hi
 ### OptiFunder — Senior Software Engineer (Promoted May 2023)
 **Sep 2021 – Oct 2025 · Remote, NY**
 
-- **Product Architecture**: Co-designed and built Genesis, an optimization/workflow platform for mortgage originators, and Greyhound, a warehouse lending platform; helped launch Greyhound and supported 15%+ of US independent originations.
+- **Product Architecture**: Co-designed and built Genesis, an optimization/workflow platform for mortgage originators, and Greyhound, a warehouse lending platform; helped launch Greyhound and supported 15%+ of US independent originations and billions of dollars of loans per month.
 - **Distributed Systems**: Led a platform-wide migration to microservices and designed task orchestration with Google Cloud Tasks/Jobs for scalable, reliable execution of core product workflows.
 - **Platform Integrations**: Designed REST APIs and shared workflows connecting originators, warehouse lenders, loan origination systems, custodians, and investors across the funding-to-paydown lifecycle.
 - **Decisioning & Data**: Built configurable optimization and rules engines for warehouse funding decisions; redesigned and normalized legacy schemas to triple query performance.
