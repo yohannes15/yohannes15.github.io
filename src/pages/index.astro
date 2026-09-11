@@ -91,7 +91,7 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
 ---
 
 <PageLayout
-  description="Backend engineer with 6+ years building scalable distributed systems in Python, TypeScript, and Go."
+  description="Senior software engineer with 6+ years building scalable distributed systems in Python, TypeScript, and Go."
 >
   <section class="hero" aria-labelledby="intro-heading">
     <img
@@ -103,11 +103,11 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
       loading="eager"
     />
     <div class="lede">
-      <h1 id="intro-heading">Backend Software Engineer</h1>
+      <h1 id="intro-heading">Senior Software Engineer</h1>
       <p class="lede-sub">
-        Backend engineer with 6+ years building scalable distributed systems.
+        Senior Software Engineer with 6+ years building scalable distributed systems.
         Highly skilled in <strong>Python</strong> (Django, Flask, FastAPI), comfortable with <strong>TypeScript/JavaScript</strong> and growing proficiency in <strong>Go</strong>.
-        Led infrastructure migrations handling 700K+ requests per day and scaled systems serving 15%+ of US independent mortgage originations.
+        Led a cloud migration serving millions of requests per day and co-designed two mortgage funding products supporting 15%+ of US independent originations.
       </p>
       <div class="education-badge">
         <span class="badge-icon">🎓</span>
@@ -146,11 +146,11 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
       <article class="exp-card">
         <div class="exp-header">
           <div class="exp-company-logo">
-            <img src="/logos/gen-logo.png" alt="Gen" width="48" height="48" />
+            <img src="/logos/gen-logo.png" alt="Gen - MoneyLion" width="48" height="48" />
           </div>
           <div class="exp-header-text">
             <h3 class="exp-title">Senior Software Engineer</h3>
-            <div class="exp-company">Gen</div>
+            <div class="exp-company">Gen - MoneyLion</div>
             <div class="exp-meta">
               <span>Oct 2025 – May 2026</span>
               <span class="exp-divider">·</span>
@@ -159,7 +159,7 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
           </div>
           <div class="exp-highlights">
             <div class="exp-highlight">
-              <div class="exp-highlight-value">700K+</div>
+              <div class="exp-highlight-value">Millions</div>
               <div class="exp-highlight-label">Requests/Day</div>
             </div>
             <div class="exp-highlight">
@@ -170,18 +170,14 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
         </div>
         <ul class="exp-list">
           <li>
-            Led the in-sourcing and migration of an outsourced Django application (~700K requests/day) from EC2 to ECS and RDS to Aurora;
-            implemented IaC with Terraform to improve reliability.
+            Led the in-sourcing and cloud migration of a Django application serving millions of requests per day, moving compute from EC2 to ECS and data from RDS to Aurora;
+            implemented Terraform-based Infrastructure as Code (IaC) to improve reliability and high availability.
           </li>
           <li>
-            Managed partner integrations via a high-throughput Django REST platform and developed internal rule-based
-            decision engines using Scala, Cats, and Http4s.
+            Built partner integrations on a high-throughput Django REST Framework platform and rule-based decision engines using Scala, Cats, and Http4s.
           </li>
           <li>
-            Designed a data pipeline (Snowflake → S3 → Lambda → SQS → application) to process over 5 million leads monthly for automated offer refreshes.
-          </li>
-          <li>
-            Supported a decisioning platform for credit card partners, enabling secure execution of partner-provided decision engines via containerized environments.
+            Designed a distributed pipeline (Snowflake → S3 → Lambda → SQS → application) to process 5M+ leads monthly for automated offer refreshes.
           </li>
         </ul>
       </article>
@@ -208,31 +204,30 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
               <div class="exp-highlight-label">US Market</div>
             </div>
             <div class="exp-highlight">
-              <div class="exp-highlight-value">200%</div>
+              <div class="exp-highlight-value">3x</div>
               <div class="exp-highlight-label">Query Speed</div>
             </div>
           </div>
         </div>
         <ul class="exp-list">
           <li>
-            Led the design and development of high-performance Django and Flask applications, serving over 15% of all US independent mortgage originations;
-            utilized a frontend stack of HTMX and React with Tailwind CSS.
+            Co-designed and built Genesis, an optimization/workflow platform for mortgage originators, and Greyhound, a warehouse lending platform;
+            helped launch Greyhound and supported 15%+ of US independent originations.
           </li>
           <li>
-            Orchestrated the migration to a microservices-based architecture for the loan optimization engine, leveraging asyncio, threading,
-            and distributed tasks via Google Cloud Tasks/Jobs.
+            Led a platform-wide migration to microservices and designed task orchestration with Google Cloud Tasks/Jobs for scalable, reliable execution of core product workflows.
           </li>
           <li>
-            Engineered and maintained robust RESTful APIs using Django REST Framework, ensuring high availability and secure data processing.
+            Designed REST APIs and shared workflows connecting originators, warehouse lenders, loan origination systems, custodians, and investors across the funding-to-paydown lifecycle.
           </li>
           <li>
-            Redesigned and normalized legacy database schemas, resulting in a 200% improvement in query performance and overall system efficiency.
+            Built configurable optimization and rules engines for warehouse funding decisions; redesigned and normalized legacy schemas to triple query performance.
           </li>
           <li>
-            Managed large-scale cloud deployments on GCP using Terraform (IaC), while establishing comprehensive testing standards with Pytest.
+            Owned scaling and reliability for Django/Flask services on GCP, managed Terraform-based infrastructure, and established automated testing standards with Pytest.
           </li>
           <li>
-            Mentored a team of 3-5 developers, driving technical decisions, conducting code reviews, and steering the product roadmap.
+            Mentored and onboarded new developers, drove architecture decisions and code reviews, and helped shape the product roadmap.
           </li>
         </ul>
       </article>
@@ -264,19 +259,13 @@ const skillCategories: { title: string; context?: { label: string; hint: string 
         </div>
         <ul class="exp-list">
           <li>
-            Developed backend services using .NET Core and deployed in Docker containers on AWS to support high-volume GPS mapping and logistics operations.
+            Built .NET Core services in Docker on AWS for high-volume GPS and logistics workloads; optimized SQL Server transactions to reduce query latency by 30%.
           </li>
           <li>
             Automated CI/CD pipelines using Jenkins, Python, and Chef, reducing deployment times by 15%.
           </li>
           <li>
-            Modernized REST and SOAP services using ASP.NET Web APIs, ensuring high availability with blue-green deployment strategies.
-          </li>
-          <li>
-            Wrote unit tests for APIs using NUnit and XUnit, achieving 85% code coverage.
-          </li>
-          <li>
-            Enhanced SQL Server database transactions and performance, reducing query response times by 30%.
+            Modernized REST/SOAP services with ASP.NET Web APIs and blue-green deployments; achieved 85% test coverage with NUnit and XUnit.
           </li>
         </ul>
       </article>
